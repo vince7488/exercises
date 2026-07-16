@@ -1,0 +1,95 @@
+html {
+  // Uses the browser's preferred base size while making 1rem equal the 18px design target by default.
+  font-size: 112.5%;
+  background: var(--colour-background);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--colour-text);
+  background: var(--colour-background);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-body);
+  font-weight: 400;
+  line-height: var(--line-height-body);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+small,
+sub,
+sup {
+  font-size: var(--font-size-small);
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--colour-text);
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-heading);
+}
+
+h1 {
+  font-size: var(--font-size-heading-1);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: var(--font-size-heading-2);
+  font-weight: 700;
+}
+
+h3 {
+  font-size: var(--font-size-heading-3);
+  font-weight: 600;
+}
+
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-heading-4);
+  font-weight: 600;
+}
+
+a {
+  color: var(--colour-secondary);
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--colour-line);
+}
+
+.v-btn.bg-primary {
+  color: var(--colour-background-white) !important;
+  font-size: var(--font-size-button);
+  font-weight: 500;
+  line-height: var(--line-height-button);
+
+  &:hover {
+    color: var(--colour-background-white) !important;
+    background-color: var(--colour-secondary) !important;
+  }
+}
