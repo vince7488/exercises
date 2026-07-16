@@ -97,9 +97,8 @@ async function submitForm() {
               {{ submitError }}
             </v-alert>
 
-            <v-form ref="formRef" validate-on="input" @submit.prevent="submitForm">
+            <v-form ref="formRef" class="subscriber-form" validate-on="input" @submit.prevent="submitForm">
               <div class="form-intro">
-                <p class="form-step">Step 1 of 1</p>
                 <h2>Subscriber details</h2>
                 <p>All fields are required. Brief form, strict standards.</p>
               </div>
@@ -125,6 +124,8 @@ async function submitForm() {
                 maxlength="254"
                 required
               />
+
+              <!-- Do I add reCaptcha? Eh, some other time -->
 
               <div class="terms-row">
                 <label class="terms-checkbox">
@@ -174,8 +175,13 @@ async function submitForm() {
   }
 }
 
+.subscriber-form {
+  display: grid;
+  row-gap: 24px;
+}
+
 .form-intro {
-  margin-bottom: 30px;
+  margin-bottom: 6px;
 
   h2,
   p {
@@ -202,7 +208,7 @@ async function submitForm() {
 }
 
 .terms-row {
-  margin: 4px 0 22px;
+  margin: 0;
   padding: 18px;
   background: #f7f5f4;
   border: 1px solid var(--colour-gray-300);

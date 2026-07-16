@@ -24,7 +24,7 @@
               Vue 3 handles the interface, Vue Router keeps both views properly linkable, and Vuetify supplies the form, feedback, dialog, and table building blocks.
             </p>
             <p>
-              The theme uses 'Treehouse' green, bark brown, TH black, white, and 5 shades of grey.
+              The theme uses 'Treehouse' green, bark brown, TH black, white, and 5 shades of grey. Also, beautifully mobile-first, and responsive.
             </p>
           </div>
         </v-col>

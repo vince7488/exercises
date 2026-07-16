@@ -30,8 +30,7 @@ The application should:
 
 ### Notes to the Dev Team
 
-- Did you know your Green isn't WCAG compliant at smaller texts? #599240 and white have a contrast ratio of roughly 3.74:1. That passes
+- Run locally with `yarn dev` (yarn package locally installed recommended).
+- The (treehouse) Green isn't WCAG compliant at smaller texts: #589240 and white have a contrast ratio of roughly 3.74:1. That passes
   for large text (24px) but fails WCAG AA for ordinary text. The 'black' on your site, #473F3D, against that green is only about 2.74:1.
-- I did what's best: the green will not be used for texts. Only background. Never with any small elements.
-- When elements are green that requires a text label (e.g., buttons), it will be white text, and min of 24px font-size, so it passes at
-  least WCAG AA standards.
+- I had to use the green for background only; not generally for text. If text is added to a green background, it has to be 24px above.
