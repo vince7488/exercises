@@ -1,0 +1,15 @@
+@use "vuetify/settings" with (
+  $body-font-family: ("Asap", sans-serif),
+  $heading-font-family: ("Asap", sans-serif),
+  $font-size-root: 1rem,
+  $line-height-root: 1.5,
+  $typography: (
+    "label-large": (
+      "size": 1.3333rem,
+      "weight": 500,
+      "line-height": 1.25,
+      "letter-spacing": normal,
+      "font-family": ("Asap", sans-serif),
+    ),
+  )
+);

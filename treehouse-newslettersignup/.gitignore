@@ -1,0 +1,172 @@
+# Dependencies
+node_modules/
+jspm_packages/
+bower_components/
+
+# Package manager files
+.pnp
+.pnp.*
+.pnp.js
+.pnp.cjs
+.yarn/*
+!.yarn/patches/
+!.yarn/plugins/
+!.yarn/releases/
+!.yarn/sdks/
+!.yarn/versions/
+package-lock.json.tmp
+package-lock.json
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Vue and Vite output
+dist/
+dist-ssr/
+.vite/
+.vite-inspect/
+*.local
+
+# Vue CLI output and cache
+.cache/
+.eslintcache
+.stylelintcache
+coverage/
+reports/
+
+# Nuxt, if introduced later
+.nuxt/
+.output/
+.nitro/
+.vercel/
+.netlify/
+
+# Build and temporary output
+build/
+out/
+tmp/
+temp/
+.tmp/
+.temp/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+lerna-debug.log*
+debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Test output
+.nyc_output/
+test-results/
+playwright-report/
+cypress/screenshots/
+cypress/videos/
+
+# Environment files
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Local certificates and secrets
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# TypeScript and build metadata
+*.tsbuildinfo
+
+# Editor and IDE files
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+*.code-workspace
+.project
+.classpath
+.settings/
+.factorypath
+
+# JetBrains
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*.swn
+Session.vim
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+.elc
+auto-save-list/
+tramp
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Windows shortcut and metadata files
+*.lnk
+*.stackdump
+
+# macOS folders
+.fseventsd/
+.TemporaryItems/
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Linux trash
+.Trash-*/
+
+# Tooling cache
+.parcel-cache/
+.turbo/
+.next/
+.swc/
+.rollup.cache/
+.rpt2_cache/
+.vitest/
+.agents/
+AGENTS.md
+
+# Storybook
+storybook-static/
+
+# Generated API and local artifacts
+*.bak
+*.backup
+*.orig
+*.rej
+
+# Local database files
+*.sqlite
+*.sqlite3
+*.db
