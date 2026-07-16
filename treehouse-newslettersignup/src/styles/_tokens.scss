@@ -34,4 +34,11 @@
   --space-6: 1.5rem;
   --space-8: 2rem;
   --space-12: 3rem;
+  --page-gutter: 20px;
+}
+
+@media (min-width: 960px) {
+  :root {
+    --page-gutter: 30px;
+  }
 }
