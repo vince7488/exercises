@@ -57,3 +57,31 @@ The demonstration for the Newsletter Signup and Subscriber list is on this direc
 - The brief was to use any of the three: React, Angular, Vue - I chose Vue3. (I think your site is in Vue2?)
 - The site mimics the treehouse marketing theme.
 - I added extras.
+
+### Screens
+
+<img width="500" height="auto" alt="image 1" src="https://github.com/user-attachments/assets/243b8cd0-205e-4981-908e-4cf4e41b9c5c" />
+
+---
+
+<img width="500" height="auto" alt="image 2" src="https://github.com/user-attachments/assets/24753ab4-feda-4cce-9291-9905545e8b81" />
+
+---
+
+<img width="500" height="auto" alt="image 3" src="https://github.com/user-attachments/assets/35445390-0870-42d7-b135-5b143c882efd" />
+
+---
+
+<img width="500" height="auto" alt="image 4" src="https://github.com/user-attachments/assets/b586edf8-e6a8-4656-870f-39cf0e0706ff" />
+
+---
+
+<img width="500" height="auto" alt="image 5" src="https://github.com/user-attachments/assets/5eb88db2-5c2b-4d66-af79-224ebc1f08b6" />
+
+---
+
+<img width="500" height="auto" alt="image 6" src="https://github.com/user-attachments/assets/b2d5cd18-3338-4ada-8b91-ca30bef48d68" />
+
+---
+
+<img width="auto" height="500" alt="image 7" src="https://github.com/user-attachments/assets/ae506dfa-8c57-47f5-88b7-7dba5642c85e" />
