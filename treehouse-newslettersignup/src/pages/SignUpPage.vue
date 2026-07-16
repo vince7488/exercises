@@ -126,6 +126,8 @@ async function submitForm() {
                 required
               />
 
+              <!-- Do I add reCaptcha? Eh, some other time -->
+
               <div class="terms-row">
                 <label class="terms-checkbox">
                   <input v-model="agreedToTerms" type="checkbox" required />

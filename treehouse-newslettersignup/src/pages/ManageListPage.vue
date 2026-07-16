@@ -138,9 +138,8 @@ onMounted(loadSubscribers);
     <v-container class="page-container" fluid>
       <div class="page-heading">
         <div>
-          <p class="eyebrow">Newsletter admin</p>
-          <h1>Manage the list</h1>
-          <p class="page-heading__copy">Review every subscriber returned by the API, newest first.</p>
+          <h1>Manage Subscriber list</h1>
+          <p class="page-heading__copy">Review every subscriber, newest first.</p>
         </div>
 
         <v-btn :to="{ name: 'sign-up' }" size="large">Add subscriber</v-btn>
@@ -304,14 +303,22 @@ onMounted(loadSubscribers);
 }
 
 .subscriber-table :deep(th) {
-  color: var(--colour-th-black);
+  color: var(--colour-background-white) !important;
   font-weight: 800 !important;
-  background: #f4f1ef !important;
+  background: var(--colour-gray-600) !important;
   white-space: nowrap;
 }
 
 .subscriber-table :deep(td) {
   min-width: 150px;
+}
+
+.subscriber-table :deep(tbody > tr:nth-child(odd)) {
+  background: var(--colour-background-white);
+}
+
+.subscriber-table :deep(tbody > tr:nth-child(even)) {
+  background: var(--colour-gray-300);
 }
 
 .id-reveal {
