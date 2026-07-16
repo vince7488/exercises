@@ -12,6 +12,12 @@ const treehouseLight = {
     "on-background": "#48403E",
     surface: "#FFFFFF",
     "on-surface": "#48403E",
+    error: "#B3261E",
+    "on-error": "#FFFFFF",
+    success: "#3F7D35",
+    "on-success": "#FFFFFF",
+    info: "#27647A",
+    "on-info": "#FFFFFF",
   },
   variables: {
     "border-color": "#48403E",
@@ -30,6 +36,23 @@ export default createVuetify({
     VBtn: {
       color: "primary",
       variant: "flat",
+      rounded: "lg",
+      style: "text-transform: none; letter-spacing: normal; font-weight: 700;",
+    },
+    VCard: {
+      rounded: "lg",
+    },
+    VTextField: {
+      color: "primary",
+      variant: "outlined",
+      rounded: "lg",
+      density: "comfortable",
+    },
+    VCheckbox: {
+      color: "primary",
+    },
+    VAlert: {
+      rounded: "lg",
     },
   },
 });
