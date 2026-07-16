@@ -37,6 +37,48 @@ textarea {
   font: inherit;
 }
 
+input[type="checkbox"] {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  display: grid;
+  flex: 0 0 24px;
+  place-content: center;
+  background: var(--colour-background-white);
+  border: 2px solid var(--colour-th-black);
+  border-radius: 4px;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+input[type="checkbox"]::before {
+  width: 12px;
+  height: 7px;
+  content: "";
+  border-bottom: 3px solid var(--colour-background-white);
+  border-left: 3px solid var(--colour-background-white);
+  transform: translateY(-1px) rotate(-45deg) scale(0);
+  transform-origin: center;
+  transition: transform 120ms ease;
+}
+
+input[type="checkbox"]:checked {
+  background: var(--colour-th-green);
+  border-color: var(--colour-th-green);
+}
+
+input[type="checkbox"]:checked::before {
+  transform: translateY(-1px) rotate(-45deg) scale(1);
+}
+
+input[type="checkbox"]:focus-visible {
+  outline: 3px solid rgb(89 146 64 / 30%);
+  outline-offset: 3px;
+}
+
 small,
 sub,
 sup {
@@ -100,8 +142,7 @@ hr {
 
 .page-section {
   background:
-    radial-gradient(circle at 100% 0%, rgb(89 146 64 / 9%), transparent 32rem),
-    var(--colour-background-white);
+    radial-gradient(circle at 100% 0%, rgb(89 146 64 / 9%), transparent 32rem), var(--colour-background-white);
 }
 
 .page-container {
@@ -142,7 +183,7 @@ hr {
 
 .eyebrow {
   margin-bottom: 10px !important;
-  color: var(--colour-treehouse-green);
+  color: var(--colour-th-green);
   font-size: var(--font-size-small);
   font-weight: 800;
   letter-spacing: 0.1em;

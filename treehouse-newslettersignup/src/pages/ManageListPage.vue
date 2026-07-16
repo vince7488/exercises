@@ -1,34 +1,25 @@
 <script setup>
-import { computed, onMounted, ref } from "vue";
-import DeleteSubscriberDialog from "../components/DeleteSubscriberDialog.vue";
-import { deleteSubscriber, getSubscribers } from "../services/newsletterApi";
+import { computed, onMounted, ref } from 'vue';
+import DeleteSubscriberDialog from '../components/DeleteSubscriberDialog.vue';
+import { deleteSubscriber, getSubscribers } from '../services/newsletterApi';
 
 const subscribers = ref([]);
 const loading = ref(true);
-const loadError = ref("");
-const deleteError = ref("");
+const loadError = ref('');
+const deleteError = ref('');
 const selectedSubscriber = ref(null);
 const deleteDialogOpen = ref(false);
 const deletingId = ref(null);
-const deletedMessage = ref("");
+const deletedMessage = ref('');
 
-const creationFields = [
-  "created_at",
-  "createdAt",
-  "date_created",
-  "created",
-  "timestamp",
-  "updated_at",
-];
+const creationFields = ['created_at', 'createdAt', 'date_created', 'created', 'timestamp', 'updated_at'];
 
 function recordId(subscriber) {
   return subscriber?.id ?? subscriber?._id ?? subscriber?.subscriber_id;
 }
 
 function creationTime(subscriber) {
-  const rawValue = creationFields
-    .map((field) => subscriber?.[field])
-    .find((value) => value !== undefined && value !== null);
+  const rawValue = creationFields.map((field) => subscriber?.[field]).find((value) => value !== undefined && value !== null);
   const timestamp = Date.parse(rawValue);
   return Number.isNaN(timestamp) ? null : timestamp;
 }
@@ -45,16 +36,14 @@ function sortNewestFirst(records) {
 
     const firstId = Number(recordId(first));
     const secondId = Number(recordId(second));
-    return Number.isFinite(firstId) && Number.isFinite(secondId)
-      ? secondId - firstId
-      : 0;
+    return Number.isFinite(firstId) && Number.isFinite(secondId) ? secondId - firstId : 0;
   });
 }
 
 function columnTitle(key) {
   return key
-    .replace(/([a-z])([A-Z])/g, "$1 $2")
-    .replace(/[_-]+/g, " ")
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/[_-]+/g, ' ')
     .replace(/^./, (letter) => letter.toUpperCase());
 }
 
@@ -72,19 +61,16 @@ const dataHeaders = computed(() => {
   }));
 });
 
-const tableHeaders = computed(() => [
-  ...dataHeaders.value,
-  { title: "Actions", key: "actions", sortable: false, align: "end" },
-]);
+const tableHeaders = computed(() => [...dataHeaders.value, { title: 'Actions', key: 'actions', sortable: false, align: 'end' }]);
 
 async function loadSubscribers() {
   loading.value = true;
-  loadError.value = "";
+  loadError.value = '';
 
   try {
     subscribers.value = sortNewestFirst(await getSubscribers());
   } catch (error) {
-    loadError.value = error.message || "The subscriber list could not be loaded.";
+    loadError.value = error.message || 'The subscriber list could not be loaded.';
   } finally {
     loading.value = false;
   }
@@ -93,7 +79,7 @@ async function loadSubscribers() {
 function openDeleteDialog(item) {
   // Vuetify may wrap rows internally, so the destructive flow always holds the original API record.
   selectedSubscriber.value = item?.raw ?? item;
-  deleteError.value = "";
+  deleteError.value = '';
   deleteDialogOpen.value = true;
 }
 
@@ -101,23 +87,21 @@ async function confirmDelete() {
   const id = recordId(selectedSubscriber.value);
 
   if (id === undefined || id === null) {
-    deleteError.value = "This record has no ID, so it cannot be removed safely.";
+    deleteError.value = 'This record has no ID, so it cannot be removed safely.';
     deleteDialogOpen.value = false;
     return;
   }
 
   deletingId.value = id;
-  deleteError.value = "";
+  deleteError.value = '';
 
   try {
     await deleteSubscriber(id);
-    subscribers.value = subscribers.value.filter(
-      (subscriber) => recordId(subscriber) !== id,
-    );
-    deletedMessage.value = "Subscriber removed from the list.";
+    subscribers.value = subscribers.value.filter((subscriber) => recordId(subscriber) !== id);
+    deletedMessage.value = 'Subscriber removed from the list.';
     deleteDialogOpen.value = false;
   } catch (error) {
-    deleteError.value = error.message || "The subscriber could not be removed.";
+    deleteError.value = error.message || 'The subscriber could not be removed.';
     deleteDialogOpen.value = false;
   } finally {
     deletingId.value = null;
@@ -135,35 +119,20 @@ onMounted(loadSubscribers);
         <div>
           <p class="eyebrow">Newsletter admin</p>
           <h1>Manage the list</h1>
-          <p class="page-heading__copy">
-            Review every subscriber returned by the API, newest first.
-          </p>
+          <p class="page-heading__copy">Review every subscriber returned by the API, newest first.</p>
         </div>
 
         <v-btn :to="{ name: 'sign-up' }" size="large">Add subscriber</v-btn>
       </div>
 
-      <v-alert
-        v-if="loadError"
-        class="mb-6"
-        type="error"
-        variant="tonal"
-        title="Could not load the list"
-      >
+      <v-alert v-if="loadError" class="mb-6" type="error" variant="tonal" title="Could not load the list">
         {{ loadError }}
         <template #append>
           <v-btn color="error" variant="outlined" @click="loadSubscribers">Retry</v-btn>
         </template>
       </v-alert>
 
-      <v-alert
-        v-if="deleteError"
-        class="mb-6"
-        type="error"
-        variant="tonal"
-        closable
-        @click:close="deleteError = ''"
-      >
+      <v-alert v-if="deleteError" class="mb-6" type="error" variant="tonal" closable @click:close="deleteError = ''">
         {{ deleteError }}
       </v-alert>
 
@@ -171,16 +140,9 @@ onMounted(loadSubscribers);
         <div class="list-card__topline">
           <div>
             <h2>Current subscribers</h2>
-            <p>{{ subscribers.length }} {{ subscribers.length === 1 ? "record" : "records" }}</p>
+            <p>{{ subscribers.length }} {{ subscribers.length === 1 ? 'record' : 'records' }}</p>
           </div>
-          <v-btn
-            color="secondary"
-            variant="outlined"
-            :loading="loading"
-            @click="loadSubscribers"
-          >
-            Refresh
-          </v-btn>
+          <v-btn color="secondary" variant="outlined" :loading="loading" @click="loadSubscribers"> Refresh </v-btn>
         </div>
 
         <v-progress-linear v-if="loading" color="primary" indeterminate />
@@ -287,7 +249,7 @@ onMounted(loadSubscribers);
   height: 72px;
   display: grid;
   place-items: center;
-  color: var(--colour-treehouse-green);
+  color: var(--colour-th-green);
   font-size: 2rem;
   font-weight: 800;
   background: #eef6ea;
@@ -295,7 +257,7 @@ onMounted(loadSubscribers);
 }
 
 .subscriber-table :deep(th) {
-  color: var(--colour-branded-black);
+  color: var(--colour-th-black);
   font-weight: 800 !important;
   background: #f4f1ef !important;
   white-space: nowrap;
