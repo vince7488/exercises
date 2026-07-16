@@ -41,4 +41,19 @@ association
    └── site
 ```
 - instructions say that a domain, site, or company is active when it: Is not deleted. Is not on hold. Does not belong to something deleted or on hold.
-- 
+
+### Answers
+
+The answers are in files:
+- `exer-01.sql`
+- `exer-02.sql`
+- and `exer-03.sql`
+
+## Newsletter Signup and Subscriber Management DevChallenge
+
+The demonstration for the Newsletter Signup and Subscriber list is on this directory of the branch: [**/treehouse-newslettersignup**](https://github.com/vince7488/exercises/tree/treehouse-marketing-cn/treehouse-newslettersignup)
+
+- You can install locally and run `yarn dev`
+- The brief was to use any of the three: React, Angular, Vue - I chose Vue3. (I think your site is in Vue2?)
+- The site mimics the treehouse marketing theme.
+- I added extras.
