@@ -19,6 +19,11 @@ function recordId(subscriber) {
   return subscriber?.id ?? subscriber?._id ?? subscriber?.subscriber_id;
 }
 
+function formatListId(value) {
+  // Keeps the table compact while the tooltip retains the complete API identifier.
+  return value === undefined || value === null ? '—' : String(value).slice(-5).toUpperCase();
+}
+
 function creationTime(subscriber) {
   const rawValue = creationFields.map((field) => subscriber?.[field]).find((value) => value !== undefined && value !== null);
   const timestamp = Date.parse(rawValue);
@@ -180,6 +185,28 @@ onMounted(loadSubscribers);
           item-value="id"
           hover
         >
+          <template #item.id="{ value }">
+            <v-tooltip
+              :text="String(value)"
+              location="top"
+              max-width="min(90vw, 520px)"
+              open-on-click
+              open-on-focus
+              open-on-hover
+            >
+              <template #activator="{ props }">
+                <button
+                  v-bind="props"
+                  class="id-reveal"
+                  type="button"
+                  :aria-label="`Show full ID ${value}`"
+                >
+                  {{ formatListId(value) }}
+                </button>
+              </template>
+            </v-tooltip>
+          </template>
+
           <template #item.created_on="{ value }">
             {{ formatListDate(value) }}
           </template>
@@ -285,6 +312,32 @@ onMounted(loadSubscribers);
 
 .subscriber-table :deep(td) {
   min-width: 150px;
+}
+
+.id-reveal {
+  padding: 5px 10px;
+  color: var(--colour-th-black);
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  background: #f5f5f5;
+  border: 1px solid var(--colour-gray-300);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+.id-reveal:hover,
+.id-reveal:focus-visible {
+  background: #eef6ea;
+  border-color: var(--colour-th-green);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.id-reveal:focus-visible {
+  box-shadow: 0 0 0 3px rgb(89 146 64 / 22%);
 }
 
 @media (max-width: 600px) {
