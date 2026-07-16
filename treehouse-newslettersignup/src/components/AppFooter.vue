@@ -21,12 +21,10 @@
           <div class="site-footer__tech-card">
             <h3>What is under the bonnet</h3>
             <p>
-              Vue 3 handles the interface, Vue Router keeps both views properly linkable, and Vuetify supplies the form, feedback, dialog,
-              and table building blocks.
+              Vue 3 handles the interface, Vue Router keeps both views properly linkable, and Vuetify supplies the form, feedback, dialog, and table building blocks.
             </p>
             <p>
-              The theme uses Treehouse green, bark brown, TH black, white, and five measured greys. A small service layer keeps API
-              details out of the pages.
+              The theme uses 'Treehouse' green, bark brown, TH black, white, and 5 shades of grey.
             </p>
           </div>
         </v-col>

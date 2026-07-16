@@ -12,7 +12,8 @@ const deleteDialogOpen = ref(false);
 const deletingId = ref(null);
 const deletedMessage = ref('');
 
-const creationFields = ['created_at', 'createdAt', 'date_created', 'created', 'timestamp', 'updated_at'];
+const creationFields = ['created_on', 'created_at', 'createdAt', 'date_created', 'created', 'timestamp', 'updated_at'];
+const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 function recordId(subscriber) {
   return subscriber?.id ?? subscriber?._id ?? subscriber?.subscriber_id;
@@ -22,6 +23,21 @@ function creationTime(subscriber) {
   const rawValue = creationFields.map((field) => subscriber?.[field]).find((value) => value !== undefined && value !== null);
   const timestamp = Date.parse(rawValue);
   return Number.isNaN(timestamp) ? null : timestamp;
+}
+
+function formatListDate(value) {
+  const date = new Date(value);
+
+  if (value === undefined || value === null || Number.isNaN(date.getTime())) {
+    return '—';
+  }
+
+  // Damn the date is in DB format... this will turn the API timestamp into the requested human-readable table date.
+  // I mean we 'could' give them a toggle for different date formats... TO-DO
+  const year = date.getFullYear();
+  const month = monthNames[date.getMonth()];
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
 }
 
 function sortNewestFirst(records) {
@@ -164,6 +180,10 @@ onMounted(loadSubscribers);
           item-value="id"
           hover
         >
+          <template #item.created_on="{ value }">
+            {{ formatListDate(value) }}
+          </template>
+
           <template #item.actions="{ item }">
             <v-btn
               color="error"
