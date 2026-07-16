@@ -3,83 +3,111 @@ import { onMounted, onUnmounted, ref } from 'vue';
 import logoUrl from '../assets/images/th-marketing-logo-2021.svg';
 
 const mobileMenuOpen = ref(false);
-const isCompact = ref(false);
+const headerMode = ref('static');
+const stickyThreshold = 123;
+const leaveDuration = 220;
+let leaveTimer;
 
-function updateCompactHeader() {
-  // Shrinks the sticky header after the first bit of scrolling without running work on every pixel.
-  isCompact.value = window.scrollY > 24;
+function updateHeaderMode() {
+  // Switches between document flow and the compact fixed header at the requested scroll threshold.
+  if (window.scrollY > stickyThreshold) {
+    window.clearTimeout(leaveTimer);
+    leaveTimer = undefined;
+    headerMode.value = 'sticky';
+    return;
+  }
+
+  if (headerMode.value === 'sticky') {
+    headerMode.value = 'leaving';
+    leaveTimer = window.setTimeout(() => {
+      headerMode.value = 'static';
+      leaveTimer = undefined;
+    }, leaveDuration);
+  }
 }
 
 onMounted(() => {
-  updateCompactHeader();
-  window.addEventListener('scroll', updateCompactHeader, { passive: true });
+  updateHeaderMode();
+  window.addEventListener('scroll', updateHeaderMode, { passive: true });
 });
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', updateCompactHeader);
+  window.clearTimeout(leaveTimer);
+  window.removeEventListener('scroll', updateHeaderMode);
 });
 </script>
 
 <template>
-  <header class="site-header" :class="{ 'site-header--compact': isCompact }">
-    <div class="site-header__inner">
-      <RouterLink class="site-header__brand" :to="{ name: 'manage-list' }" aria-label="Treehouse Marketing newsletter home">
-        <img :src="logoUrl" alt="Treehouse Marketing" />
-      </RouterLink>
+  <div class="site-header-shell">
+    <header
+      class="site-header"
+      :class="{
+        'site-header--sticky': headerMode === 'sticky',
+        'site-header--leaving': headerMode === 'leaving',
+      }"
+    >
+      <div class="site-header__inner">
+        <RouterLink class="site-header__brand" :to="{ name: 'manage-list' }" aria-label="Treehouse Marketing newsletter home">
+          <img :src="logoUrl" alt="Treehouse Marketing" />
+        </RouterLink>
 
-      <nav class="site-header__nav" aria-label="Primary navigation">
-        <RouterLink :to="{ name: 'manage-list' }">Manage List</RouterLink>
-        <RouterLink :to="{ name: 'sign-up' }">Sign Up</RouterLink>
-      </nav>
+        <nav class="site-header__nav" aria-label="Primary navigation">
+          <RouterLink :to="{ name: 'manage-list' }">Manage List</RouterLink>
+          <RouterLink :to="{ name: 'sign-up' }">Sign Up</RouterLink>
+        </nav>
 
-      <v-btn class="site-header__cta" href="https://treehousemarketing.com" target="_blank" rel="noopener noreferrer" size="large">
-        Visit Treehouse Marketing
-      </v-btn>
+        <v-btn class="site-header__cta" href="https://treehousemarketing.com" target="_blank" rel="noopener noreferrer" size="large">
+          Visit Treehouse Marketing
+        </v-btn>
 
-      <div class="site-header__mobile-menu">
-        <v-menu v-model="mobileMenuOpen" location="bottom end" :close-on-content-click="true">
-          <template #activator="{ props }">
-            <v-btn v-bind="props" class="mobile-menu__trigger" color="secondary" variant="outlined" aria-label="Open navigation menu">
-              <span class="mobile-menu__icon" aria-hidden="true">
-                <span />
-                <span />
-                <span />
-              </span>
-            </v-btn>
-          </template>
-
-          <v-card class="mobile-menu__card" min-width="280" elevation="8">
-            <p class="mobile-menu__heading">Menu</p>
-            <v-divider />
-
-            <v-list nav>
-              <v-list-item :to="{ name: 'manage-list' }" @click="mobileMenuOpen = false">
-                <v-list-item-title>Lists</v-list-item-title>
-              </v-list-item>
-              <v-divider />
-              <v-list-item :to="{ name: 'sign-up' }" @click="mobileMenuOpen = false">
-                <v-list-item-title>Sign up</v-list-item-title>
-              </v-list-item>
-            </v-list>
-
-            <v-divider />
-            <v-card-actions>
-              <v-btn block color="primary" variant="flat" href="https://treehousemarketing.com" target="_blank" rel="noopener noreferrer">
-                Visit Treehouse
+        <div class="site-header__mobile-menu">
+          <v-menu v-model="mobileMenuOpen" location="bottom end" :close-on-content-click="true">
+            <template #activator="{ props }">
+              <v-btn v-bind="props" class="mobile-menu__trigger" color="secondary" variant="outlined" aria-label="Open navigation menu">
+                <span class="mobile-menu__icon" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </span>
               </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-menu>
+            </template>
+
+            <v-card class="mobile-menu__card" min-width="280" elevation="8">
+              <p class="mobile-menu__heading">Menu</p>
+              <v-divider />
+
+              <v-list nav>
+                <v-list-item :to="{ name: 'manage-list' }" @click="mobileMenuOpen = false">
+                  <v-list-item-title>Lists</v-list-item-title>
+                </v-list-item>
+                <v-divider />
+                <v-list-item :to="{ name: 'sign-up' }" @click="mobileMenuOpen = false">
+                  <v-list-item-title>Sign up</v-list-item-title>
+                </v-list-item>
+              </v-list>
+
+              <v-divider />
+              <v-card-actions>
+                <v-btn block color="primary" variant="flat" href="https://treehousemarketing.com" target="_blank" rel="noopener noreferrer">
+                  Visit Treehouse
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-menu>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
+  </div>
 </template>
 
 <style lang="scss" scoped>
+.site-header-shell {
+  height: 120px;
+}
+
 .site-header {
-  position: sticky;
+  position: relative;
   z-index: 100;
-  top: 0;
   height: 120px;
   background: var(--colour-background-white);
   border-bottom: 1px solid var(--colour-bark-brown);
@@ -238,10 +266,14 @@ onUnmounted(() => {
   }
 }
 
-.site-header--compact {
+.site-header--sticky,
+.site-header--leaving {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
   height: 50px;
   box-shadow: 0 8px 24px rgb(72 64 62 / 14%);
-  animation: compact-header-drop 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
 
   .site-header__brand {
     width: 124px;
@@ -258,8 +290,17 @@ onUnmounted(() => {
   }
 }
 
+.site-header--sticky {
+  animation: compact-header-drop 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.site-header--leaving {
+  animation: compact-header-lift 220ms ease-in forwards;
+}
+
 @media (min-width: 960px) {
-  .site-header--compact {
+  .site-header--sticky,
+  .site-header--leaving {
     .site-header__inner {
       grid-template-columns: minmax(160px, 1fr) auto minmax(220px, 1fr);
       column-gap: 24px;
@@ -287,11 +328,25 @@ onUnmounted(() => {
 
 @keyframes compact-header-drop {
   from {
-    transform: translateY(-8px);
+    opacity: 0;
+    transform: translateY(-100%);
   }
 
   to {
+    opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes compact-header-lift {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-100%);
   }
 }
 
@@ -304,6 +359,10 @@ onUnmounted(() => {
   .mobile-menu__trigger {
     transition: none;
     animation: none;
+  }
+
+  .site-header--leaving {
+    opacity: 0;
   }
 }
 </style>
