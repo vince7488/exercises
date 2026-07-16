@@ -21,7 +21,7 @@ function recordId(subscriber) {
 
 function formatListId(value) {
   // Keeps the table compact while the tooltip retains the complete API identifier.
-  return value === undefined || value === null ? '—' : String(value).slice(-5).toUpperCase();
+  return value === undefined || value === null ? '—' : String(value).slice(0, 7).toUpperCase();
 }
 
 function creationTime(subscriber) {
