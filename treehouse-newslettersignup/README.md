@@ -5,6 +5,8 @@ This project is for the second phase of the job application challenge for the We
 I could use React, Vue, or Angular for this challenge, but as I could see that Treehousemarketing.com is actually in Vue2, I will use Vue.
 (but ver. 3). Challenges are much better if you put in on their game.
 
+They used Foundation CSS though, I used Vuetify.
+
 ## Challenge Brief
 
 ### Treehouse Newsletter Signup
