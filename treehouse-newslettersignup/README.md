@@ -28,4 +28,8 @@ The application should:
 - `DELETE /newsletter/{id}` to delete a user with the specified `{id}`.
 - `POST /newsletter` to create a new user, with the following JSON body schema.
 
-With your submission, please include all code for the client application.
+### Notes to the Dev Team
+
+- Did you know your Green isn't WCAG compliant at smaller texts? #599240 and white have a contrast ratio of roughly 3.74:1. That passes
+  for large text but fails WCAG AA for ordinary text. The 'black' on your site, #473F3D, against that green is only about 2.74:1.
+- I did what's best: the green will not be used for texts. Only background. Never with any small elements.
