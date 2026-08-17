@@ -214,6 +214,7 @@ palette swatch alone proves a component is compliant.
 | Backend           | WordPress, in `wp/`                                                         |
 | Styling           | Hand-authored SCSS with responsive CSS; no UI framework                     |
 | Icons             | `lucide-react` only for iconography unless the user approves another source |
+| Package manager   | Yarn 4, pinned through `packageManager` with `node-modules` linking         |
 | UI construction   | Semantic React components and native HTML controls                          |
 | Content transport | Explicit documented WordPress REST/API contract; no hidden coupling         |
 

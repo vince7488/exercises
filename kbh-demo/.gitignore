@@ -51,6 +51,9 @@
 # Dependency, build, package-manager, and editor artifacts.
 **/node_modules/
 **/vendor/
+**/.yarn/install-state.gz
+**/.pnp.cjs
+**/.pnp.loader.mjs
 **/.cache/
 **/.sass-cache/
 **/dist/
