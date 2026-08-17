@@ -1,0 +1,74 @@
+# Headless WordPress: core is supplied by the runtime, not Git.
+/wp/wp-admin/
+/wp/wp-includes/
+
+# Root-level WordPress core files.
+/wp/index.php
+/wp/license.txt
+/wp/readme.html
+/wp/wp-activate.php
+/wp/wp-blog-header.php
+/wp/wp-comments-post.php
+/wp/wp-config-sample.php
+/wp/wp-cron.php
+/wp/wp-links-opml.php
+/wp/wp-load.php
+/wp/wp-login.php
+/wp/wp-mail.php
+/wp/wp-settings.php
+/wp/wp-signup.php
+/wp/wp-trackback.php
+/wp/xmlrpc.php
+
+# Local/runtime WordPress configuration and credentials.
+/wp/wp-config.php
+/wp/wp-config-*.php
+/wp/.htaccess
+/wp/php.ini
+/wp/.user.ini
+/wp/web.config
+
+# WordPress content generated or managed outside this repository.
+/wp/wp-content/uploads/
+/wp/wp-content/upgrade/
+/wp/wp-content/backup*/
+/wp/wp-content/cache/
+/wp/wp-content/wflogs/
+/wp/wp-content/ai1wm-backups/
+/wp/wp-content/blogs.dir/
+/wp/wp-content/languages/
+/wp/wp-content/object-cache.php
+/wp/wp-content/advanced-cache.php
+/wp/wp-content/db.php
+/wp/wp-content/sunrise.php
+/wp/wp-content/debug.log
+
+# Third-party WordPress code. Keep intentionally committed custom themes and
+# must-use plugins outside these paths.
+/wp/wp-content/plugins/
+/wp/wp-content/themes/twentytwenty*/
+
+# Dependency, build, package-manager, and editor artifacts.
+**/node_modules/
+**/vendor/
+**/.cache/
+**/.sass-cache/
+**/dist/
+**/build/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment files and local tool state.
+.env
+.env.*
+/AGENTS.md
+!.env.example
+.wp-env/
