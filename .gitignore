@@ -1,0 +1,74 @@
+# Headless WordPress: core is supplied by the runtime, not Git.
+/wp-kitchensbyherzenberg/wp-admin/
+/wp-kitchensbyherzenberg/wp-includes/
+
+# Root-level WordPress core files.
+/wp-kitchensbyherzenberg/index.php
+/wp-kitchensbyherzenberg/license.txt
+/wp-kitchensbyherzenberg/readme.html
+/wp-kitchensbyherzenberg/wp-activate.php
+/wp-kitchensbyherzenberg/wp-blog-header.php
+/wp-kitchensbyherzenberg/wp-comments-post.php
+/wp-kitchensbyherzenberg/wp-config-sample.php
+/wp-kitchensbyherzenberg/wp-cron.php
+/wp-kitchensbyherzenberg/wp-links-opml.php
+/wp-kitchensbyherzenberg/wp-load.php
+/wp-kitchensbyherzenberg/wp-login.php
+/wp-kitchensbyherzenberg/wp-mail.php
+/wp-kitchensbyherzenberg/wp-settings.php
+/wp-kitchensbyherzenberg/wp-signup.php
+/wp-kitchensbyherzenberg/wp-trackback.php
+/wp-kitchensbyherzenberg/xmlrpc.php
+
+# Local/runtime WordPress configuration and credentials.
+/wp-kitchensbyherzenberg/wp-config.php
+/wp-kitchensbyherzenberg/wp-config-*.php
+/wp-kitchensbyherzenberg/.htaccess
+/wp-kitchensbyherzenberg/php.ini
+/wp-kitchensbyherzenberg/.user.ini
+/wp-kitchensbyherzenberg/web.config
+
+# WordPress content generated or managed outside this repository.
+/wp-kitchensbyherzenberg/wp-content/uploads/
+/wp-kitchensbyherzenberg/wp-content/upgrade/
+/wp-kitchensbyherzenberg/wp-content/backup*/
+/wp-kitchensbyherzenberg/wp-content/cache/
+/wp-kitchensbyherzenberg/wp-content/wflogs/
+/wp-kitchensbyherzenberg/wp-content/ai1wm-backups/
+/wp-kitchensbyherzenberg/wp-content/blogs.dir/
+/wp-kitchensbyherzenberg/wp-content/languages/
+/wp-kitchensbyherzenberg/wp-content/object-cache.php
+/wp-kitchensbyherzenberg/wp-content/advanced-cache.php
+/wp-kitchensbyherzenberg/wp-content/db.php
+/wp-kitchensbyherzenberg/wp-content/sunrise.php
+/wp-kitchensbyherzenberg/wp-content/debug.log
+
+# Third-party WordPress code. Keep intentionally committed custom themes and
+# must-use plugins outside these paths.
+/wp-kitchensbyherzenberg/wp-content/plugins/
+/wp-kitchensbyherzenberg/wp-content/themes/twentytwenty*/
+
+# Dependency, build, package-manager, and editor artifacts.
+**/node_modules/
+**/vendor/
+**/.cache/
+**/.sass-cache/
+**/dist/
+**/build/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment files and local tool state.
+.env
+.env.*
+/AGENTS.md
+!.env.example
+.wp-env/
