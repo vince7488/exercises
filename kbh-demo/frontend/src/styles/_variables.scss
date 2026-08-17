@@ -1,4 +1,4 @@
-// Design tokens centralize the demo's visual system for consistent SCSS use.
+// Design tokens. I based it off the tokens from the KBH site, but I have made some adjustments to suit Accessibility fixes.
 
 // Colour
 $color-primary: #244e66;
@@ -16,10 +16,13 @@ $color-border: #cbd2d5;
 $color-focus: #244e66;
 $color-overlay: rgba(10, 26, 35, 0.72);
 $color-overlay-subtle: rgba(10, 26, 35, 0.35);
+$color-overlay-hero: rgba(19, 48, 64, 0.9);
+$color-overlay-cta: rgba(36, 78, 102, 0.84);
+$color-surface-translucent: rgba(255, 255, 255, 0.94);
 
 // Typography
-$font-family-heading: 'Playfair Display SC', Georgia, serif;
-$font-family-body: 'Poppins', Arial, sans-serif;
+$font-family-heading: "Playfair Display SC", Georgia, serif;
+$font-family-body: "Poppins", Arial, sans-serif;
 $font-size-xs: 0.75rem;
 $font-size-sm: 0.875rem;
 $font-size-base: 1rem;
@@ -52,13 +55,18 @@ $space-16: 4rem;
 $space-20: 5rem;
 $space-section: clamp(4rem, 9vw, 8rem);
 $container-max-width: 70rem;
+$container-wide-max-width: 90rem;
 $container-gutter: clamp(1rem, 4vw, 2rem);
 $content-max-width: 53rem;
-$viewport-min-width: 20rem;
+$viewport-min-width: 0;
 $hero-min-height: 38.125rem;
 $hero-min-height-mobile: 35rem;
-$header-height: 5.25rem;
+$header-height: clamp(7.5rem, 10vw, 9rem);
 $header-height-mobile: 4.375rem;
+$header-logo-size: clamp(11rem, 14.75vw, 13.25rem);
+$header-logo-size-mobile: 6.5rem;
+$header-logo-offset: $space-4;
+$header-navigation-bottom-space: 15px;
 
 // Shape, elevation, motion, and layering
 $radius-sm: 0.25rem;
@@ -73,8 +81,13 @@ $shadow-md: 0 8px 20px rgba(10, 26, 35, 0.16);
 $shadow-lg: 0 20px 48px rgba(10, 26, 35, 0.2);
 $transition-fast: 150ms ease;
 $transition-base: 220ms ease;
+$transition-logo-color-hover: 450ms ease;
+$transition-logo-color-return: 750ms ease;
+$transition-logo-color-return-delay: 5s; // intentional delay to allow the user to see the logo color change on hover before it returns to its original color
 $z-index-header: 10;
 $z-index-dialog: 100;
+$z-index-skip-link: 200;
 
 // Responsive breakpoints
 $breakpoint-mobile: 43.75rem;
+$breakpoint-tablet: 64rem;

@@ -16,7 +16,9 @@ update this document before—or as part of—the approved scope-expanding imple
 
 - The rapid UX evaluation is evidence and design input. Its findings inform this demonstration; it does not independently authorize
   features, routes, integrations, legal claims, or changes beyond this document.
-- The original Kitchens & Baths by Herzenberg website is a content and visual reference, not a specification to duplicate wholesale.
+- The original Kitchens & Baths by Herzenberg website is the visual/content fidelity baseline for user-scoped edits. Preserve unaffected
+  source treatments as-is; depart from them only for findings described by the rapid UX evaluation or for another explicit user instruction.
+- This fidelity direction does not expand the route, integration, or content-model boundaries in this document.
 - User-supplied, manually saved images are the approved image source for this demonstration. Do not generate replacement imagery unless
   the user explicitly requests it.
 

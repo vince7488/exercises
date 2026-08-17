@@ -72,6 +72,7 @@ Thumbs.db
 # Environment files and local tool state.
 .env
 .env.*
+.design-qa/
 /AGENTS.md
 !.env.example
 .wp-env/
