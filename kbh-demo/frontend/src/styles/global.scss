@@ -1,0 +1,358 @@
+@use 'variables' as *;
+
+// Global document defaults provide the shared visual baseline for every route.
+:root {
+  color: $color-text;
+  background: $color-surface-base;
+  font-family: $font-family-body;
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: $viewport-min-width;
+  background: $color-surface-base;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: $focus-outline-width solid $color-focus;
+  outline-offset: $focus-outline-offset;
+}
+
+.container {
+  width: min($container-max-width, calc(100% - (2 * $container-gutter)));
+  margin: 0 auto;
+}
+
+.site-shell {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#main-content {
+  flex: 1;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: $z-index-header;
+  border-bottom: $border-width solid $color-border;
+  background: $color-surface-base;
+  box-shadow: $shadow-sm;
+}
+
+.header-inner {
+  display: flex;
+  min-height: $header-height;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-8;
+}
+
+.brand {
+  display: grid;
+  font-family: $font-family-heading;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-heading;
+  line-height: $line-height-tight;
+}
+
+.brand small {
+  margin-top: $space-2;
+  font-family: $font-family-body;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-eyebrow;
+  text-transform: uppercase;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: $space-6;
+}
+
+.main-nav a {
+  border-bottom: $border-width * 2 solid transparent;
+  padding: $space-2 0;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  transition: border-color $transition-fast;
+}
+
+.main-nav a.active,
+.main-nav a:hover {
+  border-color: currentColor;
+}
+
+.menu-button {
+  display: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: $font-size-icon;
+}
+
+.hero {
+  display: grid;
+  min-height: $hero-min-height;
+  align-items: end;
+  background:
+    linear-gradient(100deg, $color-overlay, $color-overlay-subtle),
+    url('https://images.unsplash.com/photo-1556912167-f556f1f39fdf?auto=format&fit=crop&w=1800&q=85') center / cover;
+  color: $color-text-inverse;
+}
+
+.hero-content {
+  max-width: 45rem;
+  padding: $space-section 0;
+}
+
+.eyebrow {
+  color: $color-secondary;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  letter-spacing: $letter-spacing-eyebrow;
+  text-transform: uppercase;
+}
+
+.hero .eyebrow {
+  color: $color-surface-blue;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: $space-2 0 $space-6;
+  font-family: $font-family-heading;
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-heading;
+  line-height: $line-height-heading;
+}
+
+h1 {
+  font-size: $font-size-3xl;
+}
+
+h2 {
+  font-size: $font-size-2xl;
+}
+
+h3 {
+  font-size: $font-size-xl;
+}
+
+h4 {
+  font-size: $font-size-lg;
+}
+
+.hero-copy {
+  max-width: 35rem;
+  color: $color-text-inverse;
+  font-size: $font-size-lg;
+  line-height: $line-height-body;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $space-6;
+  margin-top: $space-8;
+}
+
+.button {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: $border-width solid $color-primary;
+  border-radius: $radius-sm;
+  background: $color-primary;
+  color: $color-text-inverse;
+  padding: $space-3 $space-5;
+  font-weight: $font-weight-semibold;
+  transition: background-color $transition-fast, border-color $transition-fast, color $transition-fast;
+}
+
+.button:hover {
+  border-color: $color-primary-hover;
+  background: $color-primary-hover;
+}
+
+.text-link {
+  border-bottom: $border-width solid currentColor;
+  padding-bottom: $space-1;
+  font-weight: $font-weight-semibold;
+}
+
+.section {
+  padding-top: $space-section;
+  padding-bottom: $space-section;
+}
+
+.split-heading {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: end;
+  gap: $space-20;
+}
+
+.split-heading p,
+.wordpress-content {
+  color: $color-text-muted;
+  line-height: $line-height-body;
+}
+
+.intro .text-link {
+  display: inline-block;
+  margin-top: $space-8;
+}
+
+.site-footer {
+  background: $color-primary;
+  color: $color-text-inverse;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: $space-8;
+  padding-top: $space-12;
+  padding-bottom: $space-8;
+}
+
+.footer-inner p {
+  margin: 0;
+  line-height: $line-height-body;
+}
+
+.footer-inner a {
+  align-self: start;
+  border-bottom: $border-width solid $color-surface-warm;
+  padding-bottom: $space-1;
+}
+
+.footer-inner small {
+  grid-column: 1 / -1;
+  color: $color-surface-light;
+}
+
+.content-page {
+  max-width: $content-max-width;
+}
+
+.content-page h1 {
+  font-size: $font-size-3xl;
+}
+
+.wordpress-content {
+  font-size: $font-size-lg;
+}
+
+.wordpress-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+.wordpress-content a {
+  text-decoration: underline;
+}
+
+.not-found {
+  min-height: 50vh;
+}
+
+.sr-only {
+  position: absolute;
+  width: $visually-hidden-size;
+  height: $visually-hidden-size;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .header-inner {
+    min-height: $header-height-mobile;
+  }
+
+  .menu-button {
+    display: block;
+    z-index: 1;
+  }
+
+  .main-nav {
+    position: absolute;
+    top: $header-height-mobile;
+    right: 0;
+    left: 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    border-bottom: $border-width solid $color-border;
+    background: $color-surface-base;
+    box-shadow: $shadow-md;
+    padding: $space-4 $container-gutter;
+  }
+
+  .main-nav.is-open {
+    display: flex;
+  }
+
+  .main-nav a {
+    padding: $space-3 0;
+  }
+
+  .hero {
+    min-height: $hero-min-height-mobile;
+  }
+
+  .split-heading,
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .split-heading {
+    gap: $space-3;
+  }
+
+  .footer-inner small {
+    grid-column: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

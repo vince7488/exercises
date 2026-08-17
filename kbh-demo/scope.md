@@ -227,6 +227,8 @@ palette swatch alone proves a component is compliant.
 ### Styling policy
 
 - Use SCSS for authored styles. Do not add a CSS-in-JS system or utility-CSS framework.
+- Keep visual tokens in `frontend/src/styles/_variables.scss`. Define colours, typography, spacing, layout, radii, elevations, motion, breakpoints, and layering there; authored global/component SCSS must reference those token variables instead of repeating literal design values.
+- Load `global.scss` from the React entry point as the global SCSS composition layer. Create additional partials only when a component or concern has enough dedicated styling to warrant one.
 - Use responsive layout rules rather than separate device-specific page copies.
 - Provide visible keyboard-focus styles independently of hover styles.
 - Respect reduced-motion preferences for non-essential animation.
