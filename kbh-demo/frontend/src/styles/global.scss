@@ -723,13 +723,9 @@ p {
 }
 
 .designer-card img {
-  width: min(100%, 17rem);
-  aspect-ratio: 1 / 1;
-  margin: 0 auto $space-6;
-  border: $space-2 solid $color-surface-base;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: $shadow-md;
+  width: 100%;
+  height: auto;
+  margin: 0 0 $space-6;
 }
 
 .designer-card h3 {
@@ -1263,10 +1259,6 @@ p {
 
   .designer-grid {
     gap: $space-12;
-  }
-
-  .designer-card img {
-    width: min(75vw, 16rem);
   }
 
   .footer-brand {
