@@ -65,8 +65,16 @@ $header-height: clamp(7.5rem, 10vw, 9rem);
 $header-height-mobile: 4.375rem;
 $header-logo-size: clamp(11rem, 14.75vw, 13.25rem);
 $header-logo-size-mobile: 6.5rem;
+$responsive-header-brand-width: 150px;
+$responsive-header-logo-width: 50%;
+$responsive-header-wordmark-width: 50%;
 $header-logo-offset: $space-4;
 $header-navigation-bottom-space: 15px;
+$compact-header-height: 4.5rem;
+$compact-header-logo-column: clamp(9rem, 12.75vw, 9.25rem);
+$compact-header-brand-width: clamp(11rem, 14.75vw, 11.75rem);
+$compact-header-logo-width: 38%;
+$compact-header-threshold-offset: 185px;
 
 // Shape, elevation, motion, and layering
 $radius-sm: 0.25rem;
@@ -84,10 +92,17 @@ $transition-base: 220ms ease;
 $transition-logo-color-hover: 450ms ease;
 $transition-logo-color-return: 750ms ease;
 $transition-logo-color-return-delay: 5s; // intentional delay to allow the user to see the logo color change on hover before it returns to its original color
+$transition-compact-header-duration: 500ms;
+$transition-compact-header: $transition-compact-header-duration ease;
+$transition-mobile-nav-drawer: 280ms ease;
+$mobile-nav-drawer-max-height: 32rem;
 $z-index-header: 10;
+$z-index-compact-header: 20;
 $z-index-dialog: 100;
 $z-index-skip-link: 200;
 
 // Responsive breakpoints
 $breakpoint-mobile: 43.75rem;
 $breakpoint-tablet: 64rem;
+$breakpoint-tablet-min: 43.8125rem;
+$breakpoint-desktop: 64.0625rem;

@@ -47,7 +47,7 @@ Only these public routes are in scope:
 
 | Route                       | Role                                      | Required implementation boundary                                                                                                               |
 | --------------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/`                         | Homepage                                  | Static React-composed demonstration homepage. It does not parse or render WordPress block content for its sections.                            |
+| `/`                         | Homepage                                  | WordPress-editable headless homepage. ACF Pro supplies structured section content and media; React supplies the fixed component composition.     |
 | `/contact-us/`              | Conversion page                           | Consultation destination, contact information, and selected WordPress form integration.                                                        |
 | `/privacy-policy/`          | Supporting legal-information page         | A short, organization-specific demo page. It must contain no template placeholders or unrelated-company content.                               |
 | `/accessibility-statement/` | Supporting accessibility-information page | A truthful, organization-specific demo page with a valid support route. It must make no unverified WCAG-conformance or legal-compliance claim. |
@@ -88,11 +88,23 @@ demonstration.
 
 ### WordPress responsibilities
 
-Use standard WordPress **Pages**, not a custom post type for the homepage. WordPress is responsible for the four route-level pages and the
-selected form integration.
+Use standard WordPress **Pages**, not a custom post type for the homepage. WordPress is responsible for the four route-level pages, the
+ACF Pro homepage content schema, and the selected form integration.
 
 - Configure the WordPress Home page as the site’s front page if required by the WordPress installation.
 - Create standard pages with the route slugs in section 3.
+- Create an ACF Pro field group assigned specifically to the Home page. Model the real production homepage as meaningful, named content
+  sections with fields for its copy, links, and image placements.
+- Enable **Show in REST API** for every field group whose data the React frontend consumes.
+- Use fixed Group fields for the known homepage sections and Repeater fields only for genuinely repeated content such as services,
+  designers, gallery images, or product partners. Do not use Flexible Content unless the user explicitly decides that editors must add,
+  remove, or reorder unlike section types.
+- Use stable semantic field names that describe content purpose rather than visual position. Do not store CSS classes, spacing, colours,
+  heading sizes, breakpoint behavior, or other presentation decisions in ACF.
+- Configure image fields with one consistent return format and maintain meaningful Media Library alternative text. The frontend contract
+  must preserve the attachment identifier, URL, dimensions, available sizes, and alternative text needed for accessible responsive images.
+- Export or locally persist the ACF field-group definition so the schema is version-controlled and reviewable with the frontend mapper;
+  the database must not be the only copy of the API contract.
 - Do not create a homepage CPT, gallery CPT, services CPT, designers CPT, or other speculative content model.
 - WordPress must supply the final form plugin/endpoint contract after the user chooses the plugin or custom solution.
 - Keep credentials, API URLs, and environment-specific values out of source control. The React client reads its backend base URL from the
@@ -100,20 +112,30 @@ selected form integration.
 
 ### React responsibilities
 
-React is the presentation and interaction layer. The static homepage composition is intentionally owned by React for this assessment.
+React is the presentation and interaction layer. It renders a fixed, designed homepage from validated ACF data; it does not hard-code the
+homepage’s production copy or image content.
 
-The following are static reusable React components, not WordPress-managed page sections for the first demo iteration:
+React owns the following reusable implementation concerns:
 
 - header and responsive navigation;
-- homepage section composition and copy;
-- consultation CTA pattern and concise expectation-setting;
-- “View Our Project Gallery” strip;
+- homepage section components and their fixed composition;
+- consultation CTA presentation and interaction pattern;
+- “View Our Project Gallery” component;
 - footer and contact-detail treatment;
 - reusable demo-scope popover/dialog;
 - shared controls, visual states, and layout primitives.
 
-Do not add a generic WordPress block renderer to make the homepage editable. A future editorial need can be modeled deliberately after the
-assessment demonstration is complete.
+Homepage section components must receive normalized typed data rather than reading raw ACF responses directly. The API/data layer must:
+
+- fetch the published Home page through the documented WordPress REST endpoint and stable page slug;
+- normalize the response’s `acf` object into an explicit TypeScript homepage model;
+- validate required values and safely handle missing, malformed, or unavailable fields;
+- expose intentional loading and unavailable states rather than silently substituting unrelated content; and
+- keep WordPress field names and frontend component props connected through one documented mapper.
+
+Do not add a generic WordPress block renderer or unrestricted frontend page builder. ACF defines the editable content contract; React
+retains control of semantic markup, layout, responsive behavior, interaction, and accessibility. Shared header/footer/dialog content remains
+within its existing React boundary unless the user separately approves an ACF Options Page or another shared-content contract.
 
 ### Contact form decision point
 
@@ -213,7 +235,7 @@ palette swatch alone proves a component is compliant.
 | Area              | Decision                                                                    |
 | ----------------- | --------------------------------------------------------------------------- |
 | Frontend          | React with TypeScript and Vite, in `frontend/`                              |
-| Backend           | WordPress, in `wp/`                                                         |
+| Backend           | WordPress with ACF Pro, in `wp/`                                           |
 | Styling           | Hand-authored SCSS with responsive CSS; no UI framework                     |
 | Icons             | `lucide-react` only for iconography unless the user approves another source |
 | Package manager   | Yarn 4, pinned through `packageManager` with `node-modules` linking         |
@@ -244,6 +266,7 @@ The following are explicitly out of scope unless the user confirms a scope amend
 - creating real versions of service, gallery, design, about, process, testimonial, or designer pages;
 - copying the full source website’s content structure or interaction inventory;
 - a custom homepage CPT or speculative custom post types;
+- an unrestricted ACF Flexible Content page builder or presentation/style controls stored as ACF fields;
 - additional WordPress plugins or integrations beyond the user-selected form solution;
 - image generation, stock-image procurement, or replacement branding work;
 - user accounts, e-commerce, search, blog/news, newsletter, CRM, analytics, tracking, SEO tooling, localization, and social integrations;
@@ -256,6 +279,8 @@ The project is ready for a review only when:
 
 - the four in-scope routes are present and no extra content routes have been created;
 - the homepage drives the intended consultation journey;
+- homepage section copy, links, and images can be edited in WordPress through the version-controlled ACF Pro field schema;
+- the published WordPress REST response is normalized into a validated TypeScript homepage model before rendering;
 - out-of-scope homepage links consistently use the accessible reusable dialog;
 - WordPress/React responsibilities follow section 5;
 - visual typography and palette follow section 7, with tested component contrast;

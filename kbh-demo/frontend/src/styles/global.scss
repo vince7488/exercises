@@ -1,5 +1,5 @@
-@use 'variables' as *;
-@use '../components/brand-logo/brand-logo';
+@use "variables" as *;
+@use "../components/brand-logo/brand-logo";
 
 // Global document defaults and tokens form the responsive, accessible baseline shared by every route.
 :root {
@@ -147,7 +147,11 @@ p {
   font-weight: $font-weight-bold;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  transition: background-color $transition-fast, border-color $transition-fast, color $transition-fast, transform $transition-fast;
+  transition:
+    background-color $transition-fast,
+    border-color $transition-fast,
+    color $transition-fast,
+    transform $transition-fast;
 }
 
 .button:hover {
@@ -204,6 +208,34 @@ p {
   background: $color-surface-base;
 }
 
+.compact-header-threshold {
+  position: absolute;
+  top: $compact-header-threshold-offset;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+.compact-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: $z-index-compact-header;
+  box-shadow: none;
+  transform: translateY(-100%);
+  pointer-events: none;
+  transition: transform $transition-compact-header, box-shadow $transition-compact-header;
+}
+
+// The sticky navigation gains only the smallest elevation, making its fixed position legible at every breakpoint.
+.compact-header.is-visible {
+  box-shadow: $shadow-sm;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
 .contact-bar {
   background: $color-surface-blue;
   color: $color-primary;
@@ -240,6 +272,22 @@ p {
   gap: $space-8;
 }
 
+.header-inner-compact {
+  min-height: $compact-header-height;
+  grid-template-columns: minmax(0, 1fr) $compact-header-logo-column minmax(0, 1fr);
+}
+
+.header-inner-compact .brand {
+  top: 0;
+  width: $compact-header-brand-width;
+}
+
+.header-inner-compact .brand-logo {
+  left: 50%;
+  width: $compact-header-logo-width;
+  transform: translateX(-50%);
+}
+
 .brand {
   position: absolute;
   top: $header-logo-offset;
@@ -247,6 +295,10 @@ p {
   display: block;
   width: $header-logo-size;
   transform: translateX(-50%);
+}
+
+.brand-wordmark {
+  display: none;
 }
 
 .desktop-nav {
@@ -277,7 +329,9 @@ p {
   font-weight: $font-weight-semibold;
   letter-spacing: 0.045em;
   text-transform: uppercase;
-  transition: border-color $transition-fast, color $transition-fast;
+  transition:
+    border-color $transition-fast,
+    color $transition-fast;
 }
 
 .nav-link:hover,
@@ -775,19 +829,154 @@ p {
   white-space: nowrap;
 }
 
-@media (max-width: $breakpoint-tablet) {
-  .header-inner {
+// Desktop state hooks: the original header keeps the full mark, while its sticky successor uses the minimized mark.
+@media (min-width: $breakpoint-desktop) {
+  .header-state--top .brand-wordmark {
+    display: none;
+  }
+
+  .header-state--top .brand-logo--full .brand-logo__layer--full,
+  .header-state--scrolled .brand-logo--minimized .brand-logo__layer--minimized {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .header-state--top .brand-logo--full .brand-logo__layer--minimized,
+  .header-state--scrolled .brand-logo--minimized .brand-logo__layer--full {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+// Tablet state hooks stay independent from phone sizing, even though they begin with the same visual treatment.
+@media (min-width: $breakpoint-tablet-min) and (max-width: $breakpoint-tablet) {
+  .header-state--top .header-inner,
+  .header-state--scrolled .header-inner-compact {
     min-height: $header-height-mobile;
     grid-template-columns: 1fr auto;
   }
 
-  .brand {
+  .header-state--top .brand {
+    top: $space-1;
+    left: 0;
+    display: flex;
+    width: $responsive-header-brand-width;
+    align-items: center;
+    transform: none;
+  }
+
+  .header-state--scrolled .header-inner-compact .brand {
     top: $space-2;
     left: 0;
+    display: block;
     width: $header-logo-size-mobile;
     transform: none;
   }
 
+  .header-state--top .header-inner .brand-logo,
+  .header-state--scrolled .header-inner-compact .brand-logo {
+    position: relative;
+    display: block;
+    width: $responsive-header-logo-width;
+    aspect-ratio: 1;
+    isolation: isolate;
+    left: auto;
+    transform: none;
+  }
+
+  .header-state--top .header-inner .brand-logo {
+    width: 39%;
+  }
+
+  .header-state--top .brand-wordmark {
+    display: block;
+    width: $responsive-header-wordmark-width;
+    color: $color-secondary;
+    font-family: $font-family-heading;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    letter-spacing: $letter-spacing-heading;
+    line-height: $line-height-tight;
+    overflow-wrap: normal;
+    text-align: left;
+  }
+
+  .header-state--top .brand-logo--full .brand-logo__layer--full,
+  .header-state--scrolled .brand-logo--minimized .brand-logo__layer--full {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .header-state--top .brand-logo--full .brand-logo__layer--minimized,
+  .header-state--scrolled .brand-logo--minimized .brand-logo__layer--minimized {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+// Phone state hooks are intentionally separate so small-screen art direction can evolve without changing tablet behavior.
+@media (max-width: $breakpoint-mobile) {
+  .header-state--top .header-inner,
+  .header-state--scrolled .header-inner-compact {
+    min-height: $header-height-mobile;
+    grid-template-columns: 1fr auto;
+  }
+
+  .header-state--top .brand {
+    top: $space-1;
+    left: 0;
+    display: flex;
+    width: $responsive-header-brand-width;
+    align-items: center;
+    transform: none;
+  }
+
+  .header-state--scrolled .header-inner-compact .brand {
+    top: $space-2;
+    left: 0;
+    display: block;
+    width: $header-logo-size-mobile;
+    transform: none;
+  }
+
+  .header-state--top .header-inner .brand-logo,
+  .header-state--scrolled .header-inner-compact .brand-logo {
+    position: relative;
+    display: block;
+    width: $responsive-header-logo-width;
+    aspect-ratio: 1;
+    isolation: isolate;
+    left: auto;
+    transform: none;
+  }
+
+  .header-state--top .brand-wordmark {
+    display: block;
+    width: $responsive-header-wordmark-width;
+    color: $color-secondary;
+    font-family: $font-family-heading;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    letter-spacing: $letter-spacing-heading;
+    line-height: $line-height-tight;
+    overflow-wrap: normal;
+    text-align: left;
+  }
+
+  .header-state--top .brand-logo--full .brand-logo__layer--full,
+  .header-state--scrolled .brand-logo--minimized .brand-logo__layer--full {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .header-state--top .brand-logo--full .brand-logo__layer--minimized,
+  .header-state--scrolled .brand-logo--minimized .brand-logo__layer--minimized {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
   .desktop-nav {
     display: none;
   }
@@ -808,9 +997,24 @@ p {
 
   .mobile-nav {
     display: block;
+    max-height: 0;
+    overflow: hidden;
     border-top: $border-width solid $color-border;
     background: $color-surface-base;
+    box-shadow: none;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-$space-2);
+    transition: max-height $transition-mobile-nav-drawer, opacity $transition-mobile-nav-drawer, transform $transition-mobile-nav-drawer, box-shadow $transition-mobile-nav-drawer;
+  }
+
+  // The mobile drawer remains in the document flow and reveals its links with a reversible downward motion.
+  .mobile-nav.is-open {
+    max-height: $mobile-nav-drawer-max-height;
     box-shadow: $shadow-md;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
   }
 
   .mobile-nav-inner {
