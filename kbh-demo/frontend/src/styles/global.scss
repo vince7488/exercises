@@ -657,6 +657,10 @@ p {
   min-height: 25rem;
 }
 
+.gallery-strip--4-panels {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .gallery-strip > img {
   width: 100%;
   height: 100%;
@@ -705,6 +709,286 @@ p {
   padding-bottom: $space-1;
   font-size: $font-size-sm;
   font-weight: $font-weight-bold;
+}
+
+// Contact mirrors the source composition while its content and form fields remain owned by the WordPress page.
+.contact-page {
+  background: $color-surface-base;
+}
+
+.contact-hero {
+  height: clamp(31rem, 41vw, 37rem);
+  margin: 0;
+  overflow: hidden;
+  background: $color-surface-light;
+}
+
+.contact-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.contact-information {
+  background: $color-surface-warm;
+  padding: clamp($space-16, 7vw, $space-20) 0 $space-20;
+}
+
+.contact-introduction {
+  max-width: $content-max-width;
+  text-align: center;
+}
+
+.contact-introduction h1 {
+  color: $color-primary;
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.42);
+}
+
+.contact-introduction p {
+  margin: $space-5 0 0;
+  color: $color-text;
+  font-size: clamp($font-size-sm, 1.2vw, $font-size-base);
+  line-height: 1.7;
+}
+
+.contact-detail-grid {
+  display: grid;
+  max-width: $container-wide-max-width;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp($space-8, 6vw, $space-20);
+  margin-top: clamp($space-12, 6vw, $space-20);
+}
+
+.contact-detail {
+  min-width: 0;
+  color: $color-text;
+  text-align: center;
+}
+
+.contact-detail-icon {
+  display: grid;
+  width: 5.25rem;
+  height: 5.25rem;
+  margin: 0 auto $space-5;
+  place-items: center;
+  border-radius: 50%;
+  background: $color-surface-base;
+  color: $color-secondary;
+  box-shadow: $shadow-sm;
+}
+
+.contact-detail h2 {
+  color: $color-primary;
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+}
+
+.contact-detail p {
+  margin: $space-2 0 0;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  line-height: 1.65;
+}
+
+.contact-detail a {
+  overflow-wrap: anywhere;
+}
+
+.contact-detail a:hover {
+  text-decoration: underline;
+}
+
+.contact-form-zone {
+  background:
+    linear-gradient(to bottom, $color-surface-warm 0 8rem, transparent 8rem),
+    $color-surface-light url("/assets/contact/marble-background.jpg") center / cover;
+  padding: 0 0 clamp($space-16, 8vw, $space-section);
+}
+
+.contact-form-card {
+  width: min(75rem, calc(100% - (2 * $container-gutter)));
+  margin-inline: auto;
+  background: $color-surface-base;
+  padding: clamp($space-8, 5vw, $space-20);
+  box-shadow: $shadow-lg;
+}
+
+.contact-form-card .wpforms-title {
+  margin-bottom: clamp($space-8, 5vw, $space-12);
+  color: $color-surface-blue;
+  font-family: $font-family-heading;
+  font-size: clamp(2rem, 4vw, 3.3rem);
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-heading;
+  line-height: $line-height-heading;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.contact-form-card form,
+.contact-form-card fieldset {
+  margin: 0;
+}
+
+.contact-form-card fieldset {
+  min-width: 0;
+  border: 0;
+  padding: 0;
+}
+
+.contact-form-card .wpforms-field-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-6 $space-8;
+}
+
+.contact-form-card .wpforms-field {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+.contact-form-card [data-field-id="5"] {
+  grid-column: 1;
+}
+
+.contact-form-card [data-field-id="6"] {
+  grid-column: 2;
+}
+
+.contact-form-card [data-field-id="7"] {
+  position: absolute !important;
+  z-index: -1000 !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+}
+
+.contact-form-card .wpforms-field-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-8;
+}
+
+.contact-form-card .wpforms-field-row-block {
+  min-width: 0;
+}
+
+.contact-form-card .wpforms-field-label {
+  display: block;
+  margin-bottom: $space-2;
+  color: $color-text;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+}
+
+.contact-form-card .wpforms-required-label {
+  color: $color-primary;
+}
+
+.contact-form-card input:not([type="hidden"]),
+.contact-form-card textarea {
+  display: block;
+  width: 100%;
+  border: $border-width solid transparent;
+  border-radius: 0;
+  background: $color-surface-light;
+  color: $color-text;
+  padding: $space-3;
+  font-size: $font-size-base;
+  transition:
+    border-color $transition-fast,
+    box-shadow $transition-fast;
+}
+
+.contact-form-card input:not([type="hidden"]) {
+  min-height: 3.15rem;
+}
+
+.contact-form-card textarea {
+  min-height: 10rem;
+  resize: vertical;
+}
+
+.contact-form-card input::placeholder,
+.contact-form-card textarea::placeholder {
+  color: $color-text-muted;
+  opacity: 0.62;
+}
+
+.contact-form-card input:focus,
+.contact-form-card textarea:focus {
+  border-color: $color-primary;
+  box-shadow: 0 0 0 2px rgba(36, 78, 102, 0.14);
+  outline: 0;
+}
+
+.contact-form-card .wpforms-recaptcha-container {
+  display: none;
+}
+
+.contact-form-card .wpforms-submit-container {
+  margin-top: $space-10;
+}
+
+.contact-form-card .wpforms-submit {
+  min-height: 3rem;
+  border: $border-width solid $color-secondary;
+  border-radius: 0;
+  background: $color-secondary;
+  color: $color-text-inverse;
+  padding: $space-3 $space-6;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  cursor: pointer;
+  transition:
+    background-color $transition-fast,
+    border-color $transition-fast;
+}
+
+.contact-form-card .wpforms-submit:hover {
+  border-color: $color-secondary-hover;
+  background: $color-secondary-hover;
+}
+
+.contact-form-card .wpforms-submit:disabled {
+  cursor: wait;
+  opacity: 0.68;
+}
+
+.contact-form-field-error {
+  display: block;
+  margin-top: $space-2;
+  color: #a51d2d;
+  font-size: $font-size-xs;
+  font-style: normal;
+  font-weight: $font-weight-semibold;
+}
+
+.contact-form-feedback {
+  min-height: 1.75rem;
+  margin: $space-6 0 0;
+  color: $color-text-muted;
+  font-weight: $font-weight-semibold;
+}
+
+.contact-form-feedback.is-success {
+  border-left: 0.25rem solid $color-primary;
+  color: $color-primary;
+  padding-left: $space-4;
+}
+
+.contact-form-feedback.is-error {
+  border-left: 0.25rem solid #a51d2d;
+  color: #7d1723;
+  padding-left: $space-4;
+}
+
+.contact-form-card .wpforms-submit-spinner {
+  display: none;
 }
 
 .designers-section {
@@ -1177,6 +1461,14 @@ p {
   .footer-brand {
     grid-column: 1 / -1;
   }
+
+  .contact-information {
+    padding-top: $space-16;
+  }
+
+  .contact-detail-grid {
+    gap: $space-8;
+  }
 }
 
 @media (max-width: $breakpoint-mobile) {
@@ -1255,6 +1547,44 @@ p {
   .gallery-callout {
     grid-column: 1 / -1;
     min-height: 19rem;
+  }
+
+  .gallery-strip--4-panels .gallery-callout {
+    grid-column: auto;
+  }
+
+  .contact-hero {
+    height: clamp(10.625rem, 45vw, 20rem);
+  }
+
+  .contact-information {
+    padding-bottom: $space-16;
+  }
+
+  .contact-detail-grid {
+    grid-template-columns: 1fr;
+    gap: $space-12;
+  }
+
+  .contact-form-zone {
+    background:
+      linear-gradient(to bottom, $color-surface-warm 0 $space-16, transparent $space-16),
+      $color-surface-light url("/assets/contact/marble-background.jpg") center / cover;
+  }
+
+  .contact-form-card {
+    padding: $space-8 $space-6;
+  }
+
+  .contact-form-card .wpforms-field-container,
+  .contact-form-card .wpforms-field-row {
+    grid-template-columns: 1fr;
+    gap: $space-5;
+  }
+
+  .contact-form-card [data-field-id="5"],
+  .contact-form-card [data-field-id="6"] {
+    grid-column: 1;
   }
 
   .designer-grid {

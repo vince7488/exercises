@@ -28,6 +28,7 @@ export type WordPressPage<TAcf = Record<string, unknown>> = {
   title: WordPressRenderedText
   content: WordPressRenderedText
   excerpt: WordPressRenderedText
+  featured_media: number
   acf: TAcf
 }
 
@@ -51,6 +52,11 @@ function getApiUrl(path: string) {
   return `${wordpressUrl}/wp-json/wp/v2${path}`
 }
 
+export function getWordPressAdminAjaxUrl() {
+  if (!wordpressUrl) throw new Error('VITE_WORDPRESS_URL is not configured.')
+  return `${wordpressUrl}/wp-admin/admin-ajax.php`
+}
+
 async function fetchWordPress<T>(path: string): Promise<T> {
   const response = await fetch(getApiUrl(path), { signal: AbortSignal.timeout(8_000) })
   if (!response.ok) throw new Error(`Unable to load WordPress content (${response.status}).`)
@@ -59,7 +65,7 @@ async function fetchWordPress<T>(path: string): Promise<T> {
 
 export async function getPageBySlug<TAcf = Record<string, unknown>>(slug: string): Promise<WordPressPage<TAcf> | null> {
   if (!wordpressUrl) return null
-  const fields = 'id,slug,title,content,excerpt,acf'
+  const fields = 'id,slug,title,content,excerpt,featured_media,acf'
   const pages = await fetchWordPress<WordPressPage<TAcf>[]>(`/pages?slug=${encodeURIComponent(slug)}&_fields=${fields}`)
   return pages[0] ?? null
 }
@@ -67,7 +73,7 @@ export async function getPageBySlug<TAcf = Record<string, unknown>>(slug: string
 export async function getPageById(id: number): Promise<WordPressPage | null> {
   if (!wordpressUrl) return null
   try {
-    return await fetchWordPress<WordPressPage>(`/pages/${id}?_fields=id,slug,title,content,excerpt,acf`)
+    return await fetchWordPress<WordPressPage>(`/pages/${id}?_fields=id,slug,title,content,excerpt,featured_media,acf`)
   } catch (error) {
     if (error instanceof Error && error.message.includes('(404)')) return null
     throw error

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { DemoScopeButton } from '../../components/demo-scope-dialog/demo-scope-dialog'
 import { HeroContent } from '../../components/hero-content/hero-content'
 import { HomeHero } from '../../components/home-hero/home-hero'
+import { ProjectGalleryStrip } from '../../components/project-gallery-strip/project-gallery-strip'
 import { designers, homeServices } from '../../data/home-content'
 import { useScrollThresholdOnce } from '../../hooks/use-scroll-threshold-once'
 import { getMediaByIds, getPageBySlug, resolvePageTarget, type HomePageAcf, type WordPressMedia } from '../../lib/wordpress'
@@ -112,15 +113,13 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="gallery-strip" aria-labelledby="gallery-title">
-        <img src="/assets/home/gallery-kitchen.jpg" alt="Soft green kitchen with a marble island" width="1000" height="1000" loading="lazy" />
-        <img src="/assets/home/gallery-bathroom.jpg" alt="Luxury bathroom and custom wet bar" width="1000" height="1000" loading="lazy" />
-        <DemoScopeButton className="gallery-callout" destination="Project Gallery">
-          <span className="gallery-kicker">View our</span>
-          <span id="gallery-title" className="gallery-title" role="heading" aria-level={2}>Project Gallery</span>
-          <span className="gallery-action">Explore the gallery <ArrowRight aria-hidden="true" size={20} /></span>
-        </DemoScopeButton>
-      </section>
+      <ProjectGalleryStrip
+        headingId="gallery-title"
+        images={[
+          { src: '/assets/home/gallery-kitchen.jpg', alt: 'Soft green kitchen with a marble island' },
+          { src: '/assets/home/gallery-bathroom.jpg', alt: 'Luxury bathroom and custom wet bar' },
+        ]}
+      />
 
       <section className="designers-section" aria-labelledby="designers-title">
         <div className="container">
