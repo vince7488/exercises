@@ -244,6 +244,13 @@ palette swatch alone proves a component is compliant.
 | UI construction   | Semantic React components and native HTML controls                          |
 | Content transport | Explicit documented WordPress REST/API contract; no hidden coupling         |
 
+### Deployment-preparation amendment
+
+The React frontend may include a checked-in Vite build mode, subdirectory-aware routing and asset handling, an Apache SPA fallback, and
+example environment configuration for the user-managed GoDaddy deployment at `/kbh-demo/`. The matching WordPress installation may live
+at `/kbh-demo/wp/`. Remote uploads, hosting-account changes, database migration, production WordPress configuration, and production form
+verification remain user-owned manual work.
+
 ### Dependency policy
 
 - Do not introduce a UI framework, component library, CSS framework, icon library other than `lucide-react`, analytics, tracking, hosting,
@@ -272,7 +279,8 @@ The following are explicitly out of scope unless the user confirms a scope amend
 - additional WordPress plugins or integrations beyond the user-selected form solution;
 - image generation, stock-image procurement, or replacement branding work;
 - user accounts, e-commerce, search, blog/news, newsletter, CRM, analytics, tracking, SEO tooling, localization, and social integrations;
-- deployment, hosting, CI/CD, production database changes, or production form submissions;
+- managed hosting automation, CI/CD, production database changes, or production form submissions beyond the deployment-preparation
+  boundary in section 8;
 - legal review, legal-policy drafting beyond accurate supplied demo information, or unverified accessibility-compliance claims.
 
 ## 10. Completion criteria for the assessment demo

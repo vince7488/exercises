@@ -7,6 +7,7 @@ import { HomeHero } from '../../components/home-hero/home-hero'
 import { ProjectGalleryStrip } from '../../components/project-gallery-strip/project-gallery-strip'
 import { designers, homeServices } from '../../data/home-content'
 import { useScrollThresholdOnce } from '../../hooks/use-scroll-threshold-once'
+import { withBasePath } from '../../lib/base-path'
 import { getMediaByIds, getPageBySlug, resolvePageTarget, type HomePageAcf, type WordPressMedia } from '../../lib/wordpress'
 
 type HomeHeroState = {
@@ -97,13 +98,13 @@ export function HomePage() {
             <p>Your home is your sanctuary, and we want the renovation process to feel as considered as the finished room. Your dedicated designer works with you from the first idea through installation, communicating directly with your contractor or builder for one connected experience.</p>
             <DemoScopeButton className="button button-secondary" destination="Our Design Philosophy">Learn More</DemoScopeButton>
           </div>
-          <img src="/assets/home/quality-products.jpg" alt="Airy contemporary kitchen and dining space" width="812" height="823" loading="lazy" />
+          <img src={withBasePath('/assets/home/quality-products.jpg')} alt="Airy contemporary kitchen and dining space" width="812" height="823" loading="lazy" />
         </div>
       </section>
 
       <section className="feature-section feature-quality" aria-labelledby="quality-title">
         <div className="container feature-grid feature-grid-reverse">
-          <img src="/assets/home/design-philosophy.jpg" alt="Custom white cabinetry with detailed storage and brass hardware" width="813" height="823" loading="lazy" />
+          <img src={withBasePath('/assets/home/design-philosophy.jpg')} alt="Custom white cabinetry with detailed storage and brass hardware" width="813" height="823" loading="lazy" />
           <div className="feature-copy">
             <p className="eyebrow">Built to last</p>
             <h2 id="quality-title">Quality Products, Expert Installation</h2>
@@ -116,8 +117,8 @@ export function HomePage() {
       <ProjectGalleryStrip
         headingId="gallery-title"
         images={[
-          { src: '/assets/home/gallery-kitchen.jpg', alt: 'Soft green kitchen with a marble island' },
-          { src: '/assets/home/gallery-bathroom.jpg', alt: 'Luxury bathroom and custom wet bar' },
+          { src: withBasePath('/assets/home/gallery-kitchen.jpg'), alt: 'Soft green kitchen with a marble island' },
+          { src: withBasePath('/assets/home/gallery-bathroom.jpg'), alt: 'Luxury bathroom and custom wet bar' },
         ]}
       />
 
@@ -139,7 +140,7 @@ export function HomePage() {
       </section>
 
       <section className="consultation-section" aria-labelledby="consultation-title">
-        <img src="/assets/home/consultation-kitchen.jpg" alt="" width="2143" height="1398" loading="lazy" />
+        <img src={withBasePath('/assets/home/consultation-kitchen.jpg')} alt="" width="2143" height="1398" loading="lazy" />
         <div className="consultation-overlay" aria-hidden="true" />
         <div className="container consultation-content">
           <p className="eyebrow">Your project starts with a conversation</p>

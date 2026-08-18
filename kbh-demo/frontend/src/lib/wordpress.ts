@@ -1,3 +1,5 @@
+import { withBasePath } from './base-path'
+
 const wordpressUrl = import.meta.env.VITE_WORDPRESS_URL?.replace(/\/$/, '')
 
 export type WordPressRenderedText = {
@@ -112,7 +114,7 @@ export function mapWordPressContentUrls(html: string) {
 
     const slug = linkUrl.pathname.split('/').filter(Boolean).at(-1)
     const frontendRoute = slug ? frontendRoutesByWordPressSlug[slug] : '/'
-    if (frontendRoute) link.setAttribute('href', frontendRoute)
+    if (frontendRoute) link.setAttribute('href', withBasePath(frontendRoute))
   })
 
   return document.body.innerHTML

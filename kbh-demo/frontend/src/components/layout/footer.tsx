@@ -1,5 +1,6 @@
 import { Mail, MapPin, Phone } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { withBasePath } from '../../lib/base-path'
 
 // The footer retains the showroom and direct-contact details while keeping demo-owned legal routes explicit.
 export function Footer() {
@@ -7,7 +8,7 @@ export function Footer() {
     <footer className="site-footer">
       <div className="container footer-main">
         <div className="footer-brand">
-          <img src="/assets/home/kbh-logo-white.png" alt="Kitchens and Baths by Herzenberg" width="810" height="858" />
+          <img src={withBasePath('/assets/home/kbh-logo-white.png')} alt="Kitchens and Baths by Herzenberg" width="810" height="858" />
           <p>Creative. Experienced. Dedicated.</p>
         </div>
         <div className="footer-column">

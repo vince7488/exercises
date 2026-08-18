@@ -5,7 +5,7 @@ import { ContactPage } from '../pages/contact/contact-page'
 import { NotFoundPage } from '../pages/not-found/not-found-page'
 import { WordPressPage } from '../pages/wordpress-page/wordpress-page'
 
-// Public routes map explicitly to their published WordPress Page slugs.
+// Public routes map to WordPress Page slugs while honoring Vite's deployment subdirectory.
 export const router = createBrowserRouter([
   {
     element: <SiteLayout />,
@@ -17,4 +17,6 @@ export const router = createBrowserRouter([
       { path: '*', element: <NotFoundPage /> },
     ],
   },
-])
+], {
+  basename: import.meta.env.BASE_URL,
+})

@@ -1,6 +1,7 @@
 import { Clock3, MapPin, Phone } from 'lucide-react'
 import { useEffect, useRef, useState, type ComponentType, type FormEvent } from 'react'
 import { ProjectGalleryStrip } from '../../components/project-gallery-strip/project-gallery-strip'
+import { withBasePath } from '../../lib/base-path'
 import { normalizeContactPageContent, type ContactPageContent } from '../../lib/contact-page'
 import { getMediaByIds, getPageBySlug, getWordPressAdminAjaxUrl, type WordPressMedia } from '../../lib/wordpress'
 import { submitWpForm } from '../../lib/wpforms'
@@ -97,9 +98,9 @@ export function ContactPage() {
       <ProjectGalleryStrip
         headingId="contact-gallery-title"
         images={[
-          { src: '/assets/home/gallery-kitchen.jpg', alt: 'Soft green kitchen with a marble island' },
-          { src: '/assets/home/gallery-bathroom.jpg', alt: 'Bright custom bathroom with a freestanding tub' },
-          { src: '/assets/home/gallery-blue-kitchen.jpg', alt: 'Blue custom cabinetry with brass details' },
+          { src: withBasePath('/assets/home/gallery-kitchen.jpg'), alt: 'Soft green kitchen with a marble island' },
+          { src: withBasePath('/assets/home/gallery-bathroom.jpg'), alt: 'Bright custom bathroom with a freestanding tub' },
+          { src: withBasePath('/assets/home/gallery-blue-kitchen.jpg'), alt: 'Blue custom cabinetry with brass details' },
         ]}
       />
     </article>
