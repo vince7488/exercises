@@ -52,3 +52,26 @@ The browser's full-page implementation capture rendered incorrectly as a white i
 - [ ] Complete the user-owned post-fix manual visual review.
 
 final result: blocked
+
+## Contact page design QA
+
+### Evidence
+
+- Source visual truth: `.design-qa/source-contact-desktop-top-1440x900.png`, `.design-qa/source-contact-desktop-step-1.png` through `.design-qa/source-contact-desktop-step-6.png`, `.design-qa/source-contact-mobile-top-390x844.png`, and the user-supplied full-page production capture.
+- Implementation evidence: `.design-qa/local-contact-desktop-top-final-1440x900.png`, `.design-qa/local-contact-desktop-form-final-1440x900.png`, `.design-qa/local-contact-desktop-gallery-final-1440x900.png`, `.design-qa/local-contact-mobile-top-final-390x844.png`, `.design-qa/local-contact-mobile-details-390x844.png`, and `.design-qa/local-contact-mobile-form-390x844.png`.
+- Combined comparison: `.design-qa/contact-desktop-source-local-comparison.png` places the 1440 x 900 production source and implementation top states side by side.
+- Responsive states: desktop at 1440 x 900 CSS px and mobile at 390 x 844 CSS px. Both reported zero horizontal overflow.
+- Browser console: no warnings or errors in the final implementation state.
+
+### Findings and comparison history
+
+- [Fixed P2] The first desktop implementation made the featured-image hero too short. Its source-aligned desktop height is now approximately 590 px, while the mobile override remains approximately 176 px.
+- [Fixed P2] The initial form zone used the existing blue monogram asset despite its marble filename. It now uses the first-party white marble texture observed on the production Contact page.
+- [Fixed P2] REST-delivered WPForms labels were not arranged like the production form. The mapper now exposes First Name, Last Name, Email Address, Phone Number, City, State, and Message labels with source-aligned placeholders and responsive field grouping.
+- [Verified] WordPress supplies the Contact title, introduction, three detail columns, WPForms markup, and featured-media image. React supplies presentation and responsive layout.
+- [Verified] The form exposes associated labels, required indicators, browser autocomplete hints, a visible submit control, and a concealed honeypot field.
+- [Verified] The Contact gallery renders three square first-party images and the shared Project Gallery callout; the homepage continues to use the same component with its existing two-image configuration.
+- [Expected accessibility deviation] Contact copy uses the approved dark foreground on the warm surface instead of the production page's low-contrast white normal-sized text.
+- [Expected scope limitation] Live WPForms submission still depends on the pending WordPress form-integration decision in `scope.md`; this task maps and styles the published form without inventing a new submission endpoint.
+
+final result: passed

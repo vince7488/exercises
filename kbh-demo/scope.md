@@ -137,17 +137,19 @@ Do not add a generic WordPress block renderer or unrestricted frontend page buil
 retains control of semantic markup, layout, responsive behavior, interaction, and accessibility. Shared header/footer/dialog content remains
 within its existing React boundary unless the user separately approves an ACF Options Page or another shared-content contract.
 
-### Contact form decision point
+### Contact form integration
 
-The user will identify the chosen WordPress form plugin or custom form implementation before frontend submission work begins. Until then:
+The selected integration is the existing published WPForms Lite form ID `12` on the WordPress Contact page. The React frontend must:
 
-- do not install a form plugin;
-- do not invent a REST endpoint or submission payload;
-- do not assume field names, validation behavior, spam protection, confirmation text, or email-delivery settings;
-- keep the form UI/API contract explicitly pending.
+- preserve the published WPForms field names and required-field contract;
+- submit multipart form data to WordPress `wp-admin/admin-ajax.php` with the documented `wpforms_submit` action;
+- include the form ID, Contact page ID, and current WPForms anti-spam token supplied by the rendered form;
+- use native client validation plus WPForms server validation, retaining entered values after recoverable errors;
+- announce loading, success, general failure, and field-error outcomes accessibly;
+- use the narrowly allowlisted local frontend origin supplied by the must-use WordPress CORS bridge; and
+- omit CAPTCHA while it remains disabled in the published form configuration.
 
-The eventual contract must define required fields, labels, input types, autocomplete values, client/server validation, error messages,
-loading/submitting state, success state, failure state, and the endpoint/authentication/CORS requirements.
+WordPress remains responsible for notification recipients, confirmation text, spam settings, and email delivery.
 
 ## 6. UX and accessibility outcomes to demonstrate
 
