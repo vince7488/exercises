@@ -3,7 +3,7 @@
 
 ## About this project
 
-This project is an independent candidate-assessment demonstration created for [Envision Marketing Group](https://envision-marketing.com/).
+This [project](https://tests.vernard.net/kbh-demo) is an independent candidate-assessment demonstration created for [Envision Marketing Group](https://envision-marketing.com/).
 
 It rebuilds selected experiences from the website Envision Marketing created for [Kitchens & Baths by Herzenberg](https://kitchensbyherzenberg.com/). The demonstration applies recommendations identified through a rapid UX and accessibility evaluation of the original website.
 
