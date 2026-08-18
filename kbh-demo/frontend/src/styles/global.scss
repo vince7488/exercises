@@ -345,17 +345,20 @@ p {
   display: none;
 }
 
-// The opening image and proposition become one coherent, readable first-screen conversion area.
+// The hero fills the viewport below the measured top-state header and is driven by the WordPress ACF contract.
 .home-hero {
   position: relative;
   display: grid;
-  min-height: 43rem;
+  min-height: calc(100svh - var(--top-header-height, 11.75rem));
+  min-height: calc(100dvh - var(--top-header-height, 11.75rem));
   align-items: center;
+  overflow: hidden;
   isolation: isolate;
+  background: $color-primary;
   color: $color-text-inverse;
 }
 
-.home-hero-image,
+.home-hero-gallery,
 .home-hero-scrim {
   position: absolute;
   inset: 0;
@@ -363,10 +366,43 @@ p {
   height: 100%;
 }
 
-.home-hero-image {
+.home-hero-gallery {
+  --hero-parallax-offset: 0px;
   z-index: -2;
+  inset: -8% 0;
+  height: 116%;
+  transform: translate3d(0, var(--hero-parallax-offset), 0);
+  will-change: transform;
+}
+
+.home-hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
+  opacity: 0;
+  transition: opacity 1.4s ease-in-out;
+}
+
+.home-hero-image.is-active {
+  opacity: 1;
+}
+
+.home-hero-overlay {
+  position: relative;
+  display: grid;
+  width: 100%;
+  min-height: inherit;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 3s ease;
+}
+
+.home-hero-overlay.is-dismissed {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .home-hero-scrim {
@@ -375,32 +411,52 @@ p {
 }
 
 .home-hero-content {
-  padding-block: $space-20;
+  width: 50%;
+  padding: clamp($space-8, 7vh, $space-20) 50px;
+  text-align: left;
 }
 
-.home-hero-content > * {
-  max-width: 47rem;
-}
-
-.home-hero .eyebrow {
+.home-hero-content .frontpage-seo-text {
+  margin: 0 0 clamp($space-2, 1.5vh, $space-4);
   color: $color-surface-warm;
+  font-family: $font-family-body;
+  font-size: clamp(0.875rem, 1.1vw, 1.2rem);
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.025em;
+  line-height: 1.35;
+  -webkit-text-stroke: 0.4px $color-primary;
+  text-shadow: 0 1px 2px rgba(10, 26, 35, 0.45);
 }
 
-.home-hero h1 {
-  max-width: 55rem;
-  margin-bottom: $space-5;
+.very-large-frontpage-title {
+  display: block;
+  margin-bottom: clamp($space-3, 2vh, $space-5);
+  font-family: $font-family-heading;
+  font-size: clamp(2.6rem, 6vw, 5.5rem);
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-heading;
+  line-height: 1.05;
 }
 
-.home-hero-lede {
-  margin: 0 0 $space-3;
-  font-size: clamp($font-size-xl, 2vw, 1.6rem);
-  font-weight: $font-weight-medium;
-  line-height: 1.45;
+.home-hero-content h2 {
+  margin-bottom: clamp($space-3, 1.6vh, $space-5);
+  font-family: $font-family-body;
+  font-size: clamp(1.2rem, 2.25vw, 2rem);
+  font-weight: $font-weight-semibold;
+  line-height: 1.25;
 }
 
-.home-hero-content > p:not(.eyebrow, .home-hero-lede) {
+.home-hero-content > p {
+  width: 100%;
   margin: 0;
-  font-size: $font-size-lg;
+  font-size: clamp(0.95rem, 1.25vw, $font-size-lg);
+  line-height: $line-height-body;
+  white-space: pre-line;
+}
+
+.home-hero .button,
+.home-hero .text-link {
+  font-size: clamp($font-size-xs, 0.95vw, $font-size-sm);
 }
 
 .hero-actions {
@@ -408,7 +464,13 @@ p {
   flex-wrap: wrap;
   align-items: center;
   gap: $space-6;
-  margin-top: $space-8;
+  margin-top: clamp($space-5, 3vh, $space-8);
+}
+
+.home-hero-status {
+  place-items: center;
+  padding: $space-8;
+  text-align: center;
 }
 
 .services-section {
@@ -829,6 +891,12 @@ p {
   white-space: nowrap;
 }
 
+@media (min-width: $breakpoint-desktop) and (max-width: 100rem) {
+  .home-hero-content {
+    width: 60%;
+  }
+}
+
 // Desktop state hooks: the original header keeps the full mark, while its sticky successor uses the minimized mark.
 @media (min-width: $breakpoint-desktop) {
   .header-state--top .brand-wordmark {
@@ -977,6 +1045,10 @@ p {
 }
 
 @media (max-width: $breakpoint-tablet) {
+  .home-hero-content {
+    width: 100%;
+  }
+
   .desktop-nav {
     display: none;
   }
@@ -1059,8 +1131,8 @@ p {
   }
 
   .home-hero {
-    min-height: 41rem;
-    align-items: end;
+    min-height: calc(100svh - var(--top-header-height, 7.625rem));
+    min-height: calc(100dvh - var(--top-header-height, 7.625rem));
   }
 
   .home-hero-image {
@@ -1072,11 +1144,7 @@ p {
   }
 
   .home-hero-content {
-    padding-block: $space-16;
-  }
-
-  .home-hero-content > p:not(.eyebrow, .home-hero-lede) {
-    font-size: $font-size-base;
+    padding: $space-8 15px;
   }
 
   .hero-actions {
@@ -1170,8 +1238,8 @@ p {
     grid-column: auto;
   }
 
-  .home-hero h1 {
-    font-size: 2.25rem;
+  .very-large-frontpage-title {
+    font-size: clamp(2.25rem, 12.5vw, 3rem);
     letter-spacing: 0;
   }
 
@@ -1187,5 +1255,9 @@ p {
   *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .home-hero-gallery {
+    transform: none;
   }
 }

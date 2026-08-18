@@ -1,6 +1,6 @@
 # Kitchens by Herzenberg frontend
 
-A standalone React frontend for the headless WordPress installation in `../wp-kitchensbyherzenberg`.
+A standalone React frontend for the Kitchens by Herzenberg headless WordPress installation.
 
 This is a part of a demonstration for Envision Marketing.
 
@@ -14,15 +14,14 @@ This is a part of a demonstration for Envision Marketing.
 
 The navigation intentionally maps each route to a WordPress **Page** with the same slug:
 
-| Frontend route  | WordPress page slug |
-| --------------- | ------------------- |
-| `/our-work`     | `our-work`          |
-| `/our-approach` | `our-approach`      |
-| `/about-us`     | `about-us`          |
-| `/contact`      | `contact`           |
+| Frontend route              | WordPress page slug       |
+| --------------------------- | ------------------------- |
+| `/`                         | `home-page`               |
+| `/contact-us/`              | `contact`                 |
+| `/privacy-policy/`          | `privacy-policy`          |
+| `/accessibility-statement/` | `accessibility-statement` |
 
-Page titles and content are fetched from the public WordPress REST API. Create and publish the Contact page in WordPress with the
-`contact` slug; no frontend deployment is needed for its content to appear.
+Page titles and content are fetched from the public WordPress REST API. The homepage hero additionally maps the `hero_banner` ACF group, resolves its gallery image IDs through the Media endpoint, and resolves its CTA page ID to the matching frontend route.
 
 ## Structure
 

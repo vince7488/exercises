@@ -73,9 +73,9 @@ export function DemoScopeProvider({ children }: PropsWithChildren) {
           <X aria-hidden="true" size={22} />
         </button>
         <p className="eyebrow">Assessment demo</p>
-        <h2 id="scope-dialog-title">{destination} is outside this phase.</h2>
+        <h2 id="scope-dialog-title">{destination} is outside this scope.</h2>
         <p id="scope-dialog-description">
-          This prototype focuses on the homepage and consultation journey while applying the identified UX and accessibility recommendations.
+          This prototype focuses on the homepage and consultation journey while applying the identified UX and accessibility recommendations. Speak with Vernard Mercader for clarifications.
         </p>
         <button className="button button-secondary" type="button" onClick={closeDialog}>Return to the homepage</button>
       </dialog>

@@ -1,26 +1,50 @@
 import { ArrowRight } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { DemoScopeButton } from '../../components/demo-scope-dialog/demo-scope-dialog'
+import { HomeHero } from '../../components/home-hero/home-hero'
 import { designers, homeServices } from '../../data/home-content'
+import { getMediaByIds, getPageBySlug, resolvePageTarget, type HomePageAcf, type WordPressMedia } from '../../lib/wordpress'
 
-// The static phase-one homepage reproduces the source sequence while applying the scoped UX and accessibility remediation.
+type HomeHeroState = {
+  fields: HomePageAcf['hero_banner']
+  images: WordPressMedia[]
+  ctaTarget: string | null
+}
+
 export function HomePage() {
+  const [hero, setHero] = useState<HomeHeroState | null>(null)
+  const [heroError, setHeroError] = useState(false)
+
+  useEffect(() => {
+    let cancelled = false
+
+    async function loadHero() {
+      try {
+        const page = await getPageBySlug<HomePageAcf>('home-page')
+        const fields = page?.acf?.hero_banner
+        if (!fields) throw new Error('The homepage hero ACF group is unavailable.')
+
+        const [images, ctaTarget] = await Promise.all([
+          getMediaByIds(fields.hero_banner_gallery),
+          resolvePageTarget(fields.text_and_cta_content.cta_target),
+        ])
+
+        if (!cancelled) setHero({ fields, images, ctaTarget })
+      } catch {
+        if (!cancelled) setHeroError(true)
+      }
+    }
+
+    loadHero()
+    return () => { cancelled = true }
+  }, [])
+
   return (
     <>
-      <section className="home-hero" aria-labelledby="home-hero-title">
-        <img className="home-hero-image" src="/assets/home/hero-kitchen.jpg" alt="" width="1281" height="819" fetchPriority="high" />
-        <div className="home-hero-scrim" aria-hidden="true" />
-        <div className="container home-hero-content">
-          <p className="eyebrow">Western Massachusetts & Connecticut</p>
-          <h1 id="home-hero-title">Creative. Experienced. Dedicated.</h1>
-          <p className="home-hero-lede">Luxury kitchen, bathroom, and residential remodeling designed around the way you live.</p>
-          <p>Kitchens & Baths by Herzenberg has been transforming homes since 1949 with expert designers, dependable service, and a commitment to beautiful work.</p>
-          <div className="hero-actions">
-            <Link className="button" to="/contact-us/">Request a Consultation <ArrowRight aria-hidden="true" size={18} /></Link>
-            <DemoScopeButton className="text-link text-link-inverse" destination="Our Design Process">Explore our process</DemoScopeButton>
-          </div>
-        </div>
-      </section>
+      {hero && <HomeHero {...hero} />}
+      {!hero && !heroError && <section className="home-hero home-hero-status" aria-live="polite"><p>Loading homepage…</p></section>}
+      {heroError && <section className="home-hero home-hero-status" role="alert"><p>We could not load the homepage hero.</p></section>}
 
       <section className="services-section" aria-labelledby="services-title">
         <div className="container services-intro">

@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { BrandLogo } from '../brand-logo/brand-logo'
 import { DemoScopeButton } from '../demo-scope-dialog/demo-scope-dialog'
 import { navigation, type NavigationItem } from '../../config/navigation'
+import { useCssHeightVariable } from '../../hooks/use-css-height-variable'
 
 type NavigationLinkProps = {
   item: NavigationItem
@@ -68,10 +69,13 @@ function HeaderNavigation({ compact = false, menuId, onClose, onToggle, open }: 
 
 // The large header scrolls in normal flow; an observed 185px marker activates the independent sticky compact navigation.
 export function Header() {
+  const originalHeaderRef = useRef<HTMLElement>(null)
   const [originalMenuOpen, setOriginalMenuOpen] = useState(false)
   const [compactMenuOpen, setCompactMenuOpen] = useState(false)
   const [compactVisible, setCompactVisible] = useState(false)
   const compactThresholdRef = useRef<HTMLSpanElement>(null)
+
+  useCssHeightVariable(originalHeaderRef, '--top-header-height')
 
   useEffect(() => {
     if (!originalMenuOpen && !compactMenuOpen) return
@@ -107,7 +111,7 @@ export function Header() {
 
   return (
     <>
-      <header className="site-header site-header-original header-state--top" aria-hidden={compactVisible || undefined} inert={compactVisible}>
+      <header ref={originalHeaderRef} className="site-header site-header-original header-state--top" aria-hidden={compactVisible || undefined} inert={compactVisible}>
         <div className="contact-bar">
           <div className="container contact-bar-inner">
             <a href="https://maps.app.goo.gl/QdPTuYEgcFrmFRUM9" target="_blank" rel="noreferrer">
