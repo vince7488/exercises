@@ -2,8 +2,10 @@ import { ArrowRight } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { DemoScopeButton } from '../../components/demo-scope-dialog/demo-scope-dialog'
+import { HeroContent } from '../../components/hero-content/hero-content'
 import { HomeHero } from '../../components/home-hero/home-hero'
 import { designers, homeServices } from '../../data/home-content'
+import { useScrollThresholdOnce } from '../../hooks/use-scroll-threshold-once'
 import { getMediaByIds, getPageBySlug, resolvePageTarget, type HomePageAcf, type WordPressMedia } from '../../lib/wordpress'
 
 type HomeHeroState = {
@@ -15,6 +17,7 @@ type HomeHeroState = {
 export function HomePage() {
   const [hero, setHero] = useState<HomeHeroState | null>(null)
   const [heroError, setHeroError] = useState(false)
+  const heroTransferred = useScrollThresholdOnce(800)
 
   useEffect(() => {
     let cancelled = false
@@ -42,9 +45,25 @@ export function HomePage() {
 
   return (
     <>
-      {hero && <HomeHero {...hero} />}
+      {hero && <HomeHero {...hero} transferred={heroTransferred} />}
       {!hero && !heroError && <section className="home-hero home-hero-status" aria-live="polite"><p>Loading homepage…</p></section>}
       {heroError && <section className="home-hero home-hero-status" role="alert"><p>We could not load the homepage hero.</p></section>}
+
+      {hero && (
+        <section
+          className={heroTransferred ? 'home-hero-replica is-transferred' : 'home-hero-replica'}
+          aria-labelledby="home-hero-replica-title"
+          aria-hidden={!heroTransferred || undefined}
+          inert={!heroTransferred}
+        >
+          <HeroContent
+            className="home-hero-replica-content"
+            content={hero.fields.text_and_cta_content}
+            ctaTarget={hero.ctaTarget}
+            headingId="home-hero-replica-title"
+          />
+        </section>
+      )}
 
       <section className="services-section" aria-labelledby="services-title">
         <div className="container services-intro">
@@ -110,7 +129,7 @@ export function HomePage() {
           <div className="designer-grid">
             {designers.map((designer) => (
               <article className="designer-card" key={designer.name}>
-                <img src={designer.image} alt={`Portrait of ${designer.name}`} width="1000" height="1000" loading="lazy" />
+                <img src={designer.image} alt={`Portrait of ${designer.name}`} loading="lazy" />
                 <h3>{designer.name}</h3>
                 <p>{designer.role}</p>
                 <DemoScopeButton className="text-link" destination={`${designer.name}'s biography`}>Read full bio <ArrowRight aria-hidden="true" size={16} /></DemoScopeButton>
