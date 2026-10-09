@@ -3,11 +3,15 @@
 
 ## About this project
 
-This [project](https://tests.vernard.net/kbh-demo) is an independent candidate-assessment demonstration created for [Envision Marketing Group](https://envision-marketing.com/).
+This [project](https://tests.vernard.net/kbh-demo) is an independent candidate-assessment demonstration created for a marketing firm and as a future value proposition for the client.
 
-It rebuilds selected experiences from the website Envision Marketing created for [Kitchens & Baths by Herzenberg](https://kitchensbyherzenberg.com/). The demonstration applies recommendations identified through a rapid UX and accessibility evaluation of the original website.
+I've been invited by the firm to conduct an independent UX and accessibility audit of one of their live production projects. The review will cover heuristic evaluation, visual design critique, information architecture, and WCAG 2.2 AA conformance testing. Findings will be prioritised by severity and business impact, with actionable recommendations.
 
-This is not a complete copy of the production website. The project focuses on the primary conversion journey:
+I selected [_Kitchens & Baths by Herzenberg_](https://kitchensbyherzenberg.com/) on their roster as the target for evaluation. The purpose of this evaluation is to determine whether the website demonstrates consistent application of established accessibility requirements and WCAG standards and to identify compliance gaps within the evaluated scope.
+
+### Live Demo
+
+[Demo (at vernard.net testing grounds)](https://tests.vernard.net/kbh-demo)
 
 1. Understand the company’s remodeling and design services.
 2. Confirm its geographic service area.
