@@ -29,6 +29,7 @@ Links to other areas of the original website open an accessible demo-scope dialo
 > _This is an independent technical demonstration. It is not the official Kitchens & Baths by Herzenberg website, a production replacement, or a claim of legal or accessibility certification._
 
 ***Everything beyond this point is TL:DR; now, fair warning. Only read beyond this if you feel like nerding out***
+
 ---
 
 ## Local development requirements
