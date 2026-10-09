@@ -26,20 +26,9 @@ The implemented route scope is limited to:
 
 Links to other areas of the original website open an accessible demo-scope dialog explaining that the destination is outside the assessment’s scope.
 
-> This is an independent technical demonstration. It is not the official Kitchens & Baths by Herzenberg website, a production replacement, or a claim of legal or accessibility certification.
+> _This is an independent technical demonstration. It is not the official Kitchens & Baths by Herzenberg website, a production replacement, or a claim of legal or accessibility certification._
 
-## Project goals
-
-The project demonstrates the ability to:
-
-- Translate a UX evaluation into concrete design and development improvements.
-- Build a WordPress-editable React frontend using a headless architecture.
-- Model structured page content with Advanced Custom Fields Pro.
-- Integrate WordPress content through its REST API.
-- Build accessible, responsive React components without a UI framework.
-- Maintain a clear contract between WordPress, TypeScript, React, and SCSS.
-- Improve the primary consultation conversion journey without recreating the entire source website.
-
+***Everything beyond this point is TL:DR; now, fair warning. Only read beyond this if you feel like nerding out***
 ---
 
 ## Local development requirements
